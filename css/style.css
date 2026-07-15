@@ -1,7 +1,7 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 /* ==========================================================================
-   1. 全局配置与字体引入
+   1. 鍏ㄥ眬閰嶇疆涓庡瓧浣撳紩鍏?
    ========================================================================== */
 @font-face {
     font-family: 'MaoFont';
@@ -25,7 +25,7 @@ body, html {
 }
 
 /* ==========================================================================
-   2. 开场屏幕 (Entry Screen)
+   2. 寮€鍦哄睆骞?(Entry Screen)
    ========================================================================== */
 #entry-screen { 
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
@@ -40,7 +40,7 @@ body, html {
     background: linear-gradient(90deg, #FFD700, #fff, #FFD700); 
     background-clip: text; -webkit-background-clip: text; color: transparent; 
     animation: pulseText 2.5s infinite; text-align: center; 
-    font-family: 'MaoFont', 'STKaiti', '楷体', serif; 
+    font-family: 'MaoFont', 'STKaiti', '妤蜂綋', serif; 
 }
 
 .entry-subtitle { color: #d4a373; font-size: 18px; letter-spacing: 8px; margin-bottom: 60px; text-transform: uppercase; }
@@ -59,7 +59,7 @@ body, html {
 }
 
 /* ==========================================================================
-   3. 地图与主背景层
+   3. 鍦板浘涓庝富鑳屾櫙灞?
    ========================================================================== */
 #star-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 
@@ -79,21 +79,21 @@ body, html {
 #main-content.active { opacity: 1; pointer-events: auto; }
 #map-box { width: 100vw; height: 100vh; position: absolute; left: 0; top: 0; z-index: 1; }
 
-/* 顶部标题区 */
+/* 椤堕儴鏍囬鍖?*/
 #title-container { position: absolute; top: 25px; left: 40%; transform: translateX(-50%); text-align: center; z-index: 999; user-select: none; pointer-events: none; }
 #title { 
     font-size: 42px; font-weight: normal; letter-spacing: 6px; cursor: pointer; 
     background: linear-gradient(90deg, #FFD700 0%, #FFFFFF 25%, #FFD700 50%, #FFFFFF 75%, #FFD700 100%); 
     background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; 
     animation: shine 4s linear infinite; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)); 
-    white-space: nowrap; font-family: 'MaoFont', 'STKaiti', '楷体', serif; 
+    white-space: nowrap; font-family: 'MaoFont', 'STKaiti', '妤蜂綋', serif; 
 }
 @keyframes shine { to { background-position: 200% center; } }
 #subtitle { font-size: 14px; color: #d4a373; margin-top: 8px; letter-spacing: 2px; }
 .highlight-km { color: #FF3333; font-weight: bold; font-size: 18px; text-shadow: 0 0 10px rgba(255,51,51,0.6); margin: 0 4px; }
 #back-btn { display: none; } 
 
-/* 左上角随机品鉴按钮 */
+/* 宸︿笂瑙掗殢鏈哄搧閴存寜閽?*/
 #overview-btn {
     position: absolute; top: 90px; left: 30px; padding: 10px 24px;
     background: rgba(212, 163, 115, 0.15); color: #d4a373; border: 1px solid rgba(212, 163, 115, 0.4);
@@ -102,7 +102,7 @@ body, html {
 }
 #overview-btn:hover { background: rgba(255, 215, 0, 0.25); color: #FFD700; border-color: #FFD700; box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); transform: translateY(-2px); }
 
-/* 地图控制罗盘 */
+/* 鍦板浘鎺у埗缃楃洏 */
 #map-controls {
     position: absolute; right: 400px; bottom: 100px; z-index: 999;
     display: flex; flex-direction: column; gap: 10px;
@@ -123,7 +123,7 @@ body, html {
 }
 
 /* ==========================================================================
-   4. 右侧侧边栏 (Sidebar)
+   4. 鍙充晶渚ц竟鏍?(Sidebar)
    ========================================================================== */
 #sidebar { 
     position: absolute; right: 0; top: 0; width: 380px; height: 100vh; 
@@ -151,12 +151,12 @@ body, html {
 .stat-num { color: #FFD700; font-size: 28px; font-weight: 900; font-family: 'NormFont', sans-serif; text-shadow: 0 0 15px rgba(255,215,0,0.6); }
 .stat-label { 
     color: #d4a373; 
-    font-size: 13px;        /* 字体微调放大一点点 */
-    margin-top: 6px;        /* 拉开与上方数字的距离，看着不拥挤 */
-    letter-spacing: 1px;    /* 增加字间距，更显高级感 */
+    font-size: 13px;        /* 瀛椾綋寰皟鏀惧ぇ涓€鐐圭偣 */
+    margin-top: 6px;        /* 鎷夊紑涓庝笂鏂规暟瀛楃殑璺濈锛岀湅鐫€涓嶆嫢鎸?*/
+    letter-spacing: 1px;    /* 澧炲姞瀛楅棿璺濓紝鏇存樉楂樼骇鎰?*/
 }
 
-/* 侧边栏列表项目 */
+/* 渚ц竟鏍忓垪琛ㄩ」鐩?*/
 #school-list { flex: 1; overflow-y: auto; padding: 15px; scroll-behavior: smooth; }
 .school-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 15px; margin-bottom: 12px; cursor: pointer; transition: all 0.3s ease; position: relative;}
 .school-card.important { border-left: 4px solid rgba(255, 51, 51, 0.8); background: rgba(255, 215, 0, 0.02); }
@@ -177,47 +177,47 @@ body, html {
 .read-more-btn { display: inline-block; padding: 4px 10px; background: rgba(255, 51, 51, 0.2); border: 1px solid #FF3333; color: #FF3333; font-size: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s; z-index: 10; position: relative;}
 .read-more-btn:hover { background: #FF3333; color: #fff; box-shadow: 0 0 10px rgba(255,51,51,0.5); }
 
-/* 全局滚动条美化 */
+/* 鍏ㄥ眬婊氬姩鏉＄編鍖?*/
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
 ::-webkit-scrollbar-thumb { background: rgba(255, 215, 0, 0.3); border-radius: 3px; }
 
 /* ==========================================================================
-   5. 卷轴风格赏析弹窗 (诗词展示核心区域)
+   5. 鍗疯酱椋庢牸璧忔瀽寮圭獥 (璇楄瘝灞曠ず鏍稿績鍖哄煙)
    ========================================================================== */
-/* 外层半透明遮罩 */
+/* 澶栧眰鍗婇€忔槑閬僵 */
 #poem-modal { 
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-    background: rgba(0, 0, 0, 0.15); /* 高透背景 */
-    backdrop-filter: blur(2px);      /* 极低模糊度，透出地图 */
+    background: rgba(0, 0, 0, 0.15); /* 楂橀€忚儗鏅?*/
+    backdrop-filter: blur(2px);      /* 鏋佷綆妯＄硦搴︼紝閫忓嚭鍦板浘 */
     z-index: 3000; display: none; align-items: center; justify-content: center; 
     opacity: 0; transition: opacity 0.3s ease; 
 }
 
-/* 展示框主体：固定4:3比例，去纸质化暗黑玻璃态 */
+/* 灞曠ず妗嗕富浣擄細鍥哄畾4:3姣斾緥锛屽幓绾歌川鍖栨殫榛戠幓鐠冩€?*/
 .poem-scroll-content { 
     background: transparent; 
     border: 1px solid rgba(255, 215, 0, 0.3); 
     border-radius: 12px; 
-    width: 92vw;             /* 整体尺寸调大 */
+    width: 92vw;             /* 鏁翠綋灏哄璋冨ぇ */
     max-width: 1200px; 
-    aspect-ratio: 4 / 3;     /* 强制固定 4:3 比例 */
-    padding: 10px 50px 30px 50px; /* 大幅减小顶部留白，为标题上提腾空间 */
+    aspect-ratio: 4 / 3;     /* 寮哄埗鍥哄畾 4:3 姣斾緥 */
+    padding: 10px 50px 30px 50px; /* 澶у箙鍑忓皬椤堕儴鐣欑櫧锛屼负鏍囬涓婃彁鑵剧┖闂?*/
     box-shadow: 0 0 50px rgba(0,0,0,0.9), inset 0 0 20px rgba(255,215,0,0.05); 
     overflow: hidden; position: relative; color: #eee; 
     font-family: 'NormFont', serif; 
-    display: flex; flex-direction: column; /* 使用flex布局消除内部留白 */
+    display: flex; flex-direction: column; /* 浣跨敤flex甯冨眬娑堥櫎鍐呴儴鐣欑櫧 */
 }
 .poem-scroll-content::before, .poem-scroll-content::after { display: none; }
 
-/* 视频层 */
+/* 瑙嗛灞?*/
 #modal-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; }
 .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%); z-index: 1; pointer-events: none; }
 
-/* 层级提升，确保在视频遮罩上 */
+/* 灞傜骇鎻愬崌锛岀‘淇濆湪瑙嗛閬僵涓?*/
 .close-modal, .modal-audio-btn, .modal-quote, .modal-header-info, .modal-body, #audio-progress-container { position: relative; z-index: 2; }
 
-/* 关闭按钮：右上角 */
+/* 鍏抽棴鎸夐挳锛氬彸涓婅 */
 .close-modal {
     position: absolute !important;
     top: 15px; right: 15px;
@@ -231,27 +231,27 @@ body, html {
 }
 .close-modal:hover { background: rgba(255, 51, 51, 0.3); border-color: #FF3333; color: #fff; }
 
-/* 沉浸式音频播放进度条 (紧贴顶部边缘) */
+/* 娌夋蹈寮忛煶棰戞挱鏀捐繘搴︽潯 (绱ц创椤堕儴杈圭紭) */
 #audio-progress-container { position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: rgba(186, 42, 36, 0.15); z-index: 5000; display: none; }
 #audio-progress-bar { height: 100%; width: 0%; background: #ba2a24; box-shadow: 0 0 8px #ba2a24; transition: width 0.1s linear; }
 
-/* 标题信息区域 (上提到脖子处) */
+/* 鏍囬淇℃伅鍖哄煙 (涓婃彁鍒拌剸瀛愬) */
 .modal-header-info { 
     text-align: center; 
-    margin-top: 180px;      /* 向上微调卡入脖子位置 */
-    margin-bottom: 10px;    /* 缩小底部间距 */
+    margin-top: 180px;      /* 鍚戜笂寰皟鍗″叆鑴栧瓙浣嶇疆 */
+    margin-bottom: 10px;    /* 缂╁皬搴曢儴闂磋窛 */
     border-bottom: 1px dashed #ba2a24; 
     padding-bottom: 15px; 
 }
 .modal-poem-title { 
-    color: #ff4d4d;         /* 红色发光效果 */
+    color: #ff4d4d;         /* 绾㈣壊鍙戝厜鏁堟灉 */
     text-shadow: 2px 2px 4px rgba(0,0,0,0.9), 0 0 12px rgba(255, 51, 51, 0.8), 0 0 24px rgba(255, 51, 51, 0.5); 
     font-size: 38px; font-weight: normal; margin-bottom: 10px; letter-spacing: 2px; 
     font-family: 'MaoFont', 'STKaiti', serif; 
 }
 .modal-poem-meta { color: #d4a373; text-shadow: 0 1px 3px rgba(0,0,0,0.8); font-size: 16px; }
 
-/* 弹窗专属朗读按钮 (精准定位到标题右下角) */
+/* 寮圭獥涓撳睘鏈楄鎸夐挳 (绮惧噯瀹氫綅鍒版爣棰樺彸涓嬭) */
 .modal-audio-btn {
     padding: 6px 16px; background: rgba(186, 42, 36, 0.1); border: 1px solid #ba2a24; color: #ba2a24;
     border-radius: 20px; cursor: pointer; font-size: 14px; font-weight: bold;
@@ -262,13 +262,13 @@ body, html {
 .modal-audio-btn.playing { animation: pulseAudio 2s infinite; }
 @keyframes pulseAudio { 0% { box-shadow: 0 0 0 0 rgba(186,42,36, 0.4); } 70% { box-shadow: 0 0 0 8px rgba(186,42,36, 0); } 100% { box-shadow: 0 0 0 0 rgba(186,42,36, 0); } }
 
-/* 按钮容器 */
+/* 鎸夐挳瀹瑰櫒 */
 .modal-actions {
     display: flex; justify-content: center; align-items: center; gap: 10px;
     margin-top: 10px;
 }
 
-/* 朗读语速按钮 */
+/* 鏈楄璇€熸寜閽?*/
 .modal-speed-btn {
     padding: 6px 12px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.3);
     color: #ddd; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: bold;
@@ -276,7 +276,7 @@ body, html {
 }
 .modal-speed-btn:hover { background: rgba(255, 255, 255, 0.2); border-color: #fff; color: #fff; }
 
-/* 字体大小调节按钮 */
+/* 瀛椾綋澶у皬璋冭妭鎸夐挳 */
 .modal-font-btns {
     position: absolute; top: 15px; left: 15px; z-index: 10; display: flex; gap: 6px;
 }
@@ -288,44 +288,44 @@ body, html {
 }
 .font-btn:hover { background: rgba(255, 215, 0, 0.2); border-color: #FFD700; color: #FFD700; }
 
-/* 诗词背景面板 (自动撑满剩余空间，消除留白) */
+/* 璇楄瘝鑳屾櫙闈㈡澘 (鑷姩鎾戞弧鍓╀綑绌洪棿锛屾秷闄ょ暀鐧? */
 .modal-body { 
-    flex: 1;                 /* 占据固定比例下所有剩余空间 */
-    margin-top: 0;           /* 紧贴顶部区域 */
+    flex: 1;                 /* 鍗犳嵁鍥哄畾姣斾緥涓嬫墍鏈夊墿浣欑┖闂?*/
+    margin-top: 0;           /* 绱ц创椤堕儴鍖哄煙 */
     display: flex; flex-direction: column; gap: 20px; 
-    background: rgba(15, 3, 3, 0.35); /* 内框高透玻璃 */
+    background: rgba(15, 3, 3, 0.35); /* 鍐呮楂橀€忕幓鐠?*/
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); 
     padding: 30px 40px; 
     border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.2); 
     box-shadow: 0 10px 40px rgba(0,0,0,0.9); 
-    overflow-y: auto;        /* 内部溢出滚动，完美容纳长篇创作背景 */
+    overflow-y: auto;        /* 鍐呴儴婧㈠嚭婊氬姩锛屽畬缇庡绾抽暱绡囧垱浣滆儗鏅?*/
 }
-/* 面板内部独立滚动条美化 */
+/* 闈㈡澘鍐呴儴鐙珛婊氬姩鏉＄編鍖?*/
 .modal-body::-webkit-scrollbar { width: 6px; }
 .modal-body::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 3px; }
 .modal-body::-webkit-scrollbar-thumb { background: rgba(255, 215, 0, 0.3); border-radius: 3px; }
 
 .modal-section-title { font-size: 20px; font-weight: bold; color: #ba2a24; display: flex; align-items: center; margin-bottom: 10px; }
-.modal-section-title::before { content: '■'; font-size: 12px; margin-right: 8px; color: #ba2a24; }
+.modal-section-title::before { content: '鈻?; font-size: 12px; margin-right: 8px; color: #ba2a24; }
 
-/* 诗词正文 (字体优雅化与间距缩小) */
+/* 璇楄瘝姝ｆ枃 (瀛椾綋浼橀泤鍖栦笌闂磋窛缂╁皬) */
 .modal-full-text {
-    font-family: 'STZhongkai', '华文正楷', 'STKaiti', 'KaiTi', '楷体', serif;
-    font-weight: 500;        /* 拒绝生硬粗体，保留书法韵味 */
+    font-family: 'STZhongkai', '鍗庢枃姝ｆシ', 'STKaiti', 'KaiTi', '妤蜂綋', serif;
+    font-weight: 500;        /* 鎷掔粷鐢熺‖绮椾綋锛屼繚鐣欎功娉曢煹鍛?*/
     font-size: 22px;
-    line-height: 1.7;        /* 行间距缩小 */
-    letter-spacing: 4px;     /* 字间距适中 */
+    line-height: 1.7;        /* 琛岄棿璺濈缉灏?*/
+    letter-spacing: 4px;     /* 瀛楅棿璺濋€備腑 */
     text-align: center; white-space: pre-wrap; color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.85); /* 强化文字边缘，防吃色 */
+    text-shadow: 0 2px 8px rgba(0,0,0,0.85); /* 寮哄寲鏂囧瓧杈圭紭锛岄槻鍚冭壊 */
 }
 
-/* 创作背景文字 */
+/* 鍒涗綔鑳屾櫙鏂囧瓧 */
 .modal-background-text {
     color: #f0f0f0; background: rgba(0, 0, 0, 0.4); border-left: 4px solid #FFD700;
     font-size: 18px; line-height: 2.2; letter-spacing: 1px; text-indent: 2em; padding: 20px; border-radius: 8px;
 }
 
-/* 长名言书法水印 */
+/* 闀垮悕瑷€涔︽硶姘村嵃 */
 .modal-quote { 
     position: absolute; right: 40px; top: 50%; transform: translateY(-50%); 
     color: rgba(186, 42, 36, 0.08); font-family: 'MaoFont', 'STXingkai', 'KaiTi', serif; 
@@ -335,7 +335,7 @@ body, html {
 }
 
 /* ==========================================================
-           音乐与截图按钮优化：停止时内敛，播放时破框旋转
+           闊充箰涓庢埅鍥炬寜閽紭鍖栵細鍋滄鏃跺唴鏁涳紝鎾斁鏃剁牬妗嗘棆杞?
            ========================================================== */
         
         #snapshot-btn, #music-btn { 
@@ -353,7 +353,7 @@ body, html {
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
-        /* 截图按钮保持原有的内敛质感 */
+        /* 鎴浘鎸夐挳淇濇寔鍘熸湁鐨勫唴鏁涜川鎰?*/
         #snapshot-btn { 
             left: 110px; 
             background-image: url('https://cdn-icons-png.flaticon.com/512/3659/3659899.png');
@@ -366,12 +366,12 @@ body, html {
             left: 40px;
         }
 
-        /* 👇 核心修改：隐形的大图层。默认停止状态下，缩小尺寸乖乖待在框内 */
+        /* 馃憞 鏍稿績淇敼锛氶殣褰㈢殑澶у浘灞傘€傞粯璁ゅ仠姝㈢姸鎬佷笅锛岀缉灏忓昂瀵镐箹涔栧緟鍦ㄦ鍐?*/
         #music-btn::after {
             content: '';
             position: absolute;
-            top: -15px; left: -15px; right: -15px; bottom: -15px; /* 画布实际大小为 80x80 */
-            /* background-size 设为 35%（约28px），完美收纳在 50px 的圆环内部 */
+            top: -15px; left: -15px; right: -15px; bottom: -15px; /* 鐢诲竷瀹為檯澶у皬涓?80x80 */
+            /* background-size 璁句负 35%锛堢害28px锛夛紝瀹岀編鏀剁撼鍦?50px 鐨勫渾鐜唴閮?*/
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD700'%3E%3Cpath d='M21 3v12.5a3.5 3.5 0 1 1-3.5-3.5c.54 0 1.05.12 1.5.34V6.47L9 8.6v8.9A3.5 3.5 0 1 1 5.5 14c.54 0 1.05.12 1.5.34V3h14z'/%3E%3C/svg%3E") center/35% no-repeat;
             z-index: 2;
             transform-origin: center center;
@@ -379,15 +379,15 @@ body, html {
             filter: drop-shadow(0 2px 3px rgba(0,0,0,0.6)); 
         }
 
-        /* 播放时：底座圆环亮起 */
+        /* 鎾斁鏃讹細搴曞骇鍦嗙幆浜捣 */
         #music-btn.playing { 
             border-color: #FFD700;
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), inset 0 0 10px rgba(255, 215, 0, 0.2); 
         }
 
-        /* 👇 播放时：音符瞬间变大（破框）并开始 360 度匀速旋转 */
+        /* 馃憞 鎾斁鏃讹細闊崇鐬棿鍙樺ぇ锛堢牬妗嗭級骞跺紑濮?360 搴﹀寑閫熸棆杞?*/
         #music-btn.playing::after { 
-            /* background-size 扩大到 75%（约60px），瞬间突破 50px 的边界 */
+            /* background-size 鎵╁ぇ鍒?75%锛堢害60px锛夛紝鐬棿绐佺牬 50px 鐨勮竟鐣?*/
             background-size: 75%;
             animation: spinNote 4s linear infinite; 
             filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9)); 
@@ -398,10 +398,10 @@ body, html {
             to { transform: rotate(360deg); }
         }
 /* ==========================================================
-           时间轴 UI 终极修复版：发光毛玻璃 + 红金细线轨道 + 悬浮文字
+           鏃堕棿杞?UI 缁堟瀬淇鐗堬細鍙戝厜姣涚幓鐠?+ 绾㈤噾缁嗙嚎杞ㄩ亾 + 鎮诞鏂囧瓧
            ========================================================== */
 
-        /* 1. 居中动态时间轴面板：毛玻璃边缘 + 发光效果 */
+        /* 1. 灞呬腑鍔ㄦ€佹椂闂磋酱闈㈡澘锛氭瘺鐜荤拑杈圭紭 + 鍙戝厜鏁堟灉 */
         #timeline-container {
             position: absolute; bottom: 35px; left: calc(50% - 190px); transform: translateX(-50%);
             width: 50%; max-width: 750px; height: 44px; z-index: 998;
@@ -419,7 +419,7 @@ body, html {
                 0 10px 20px rgba(0, 0, 0, 0.6);        
         }
 
-        /* 👇 修复丢失的样式：恢复播放按钮的悬浮发光质感 */
+        /* 馃憞 淇涓㈠け鐨勬牱寮忥細鎭㈠鎾斁鎸夐挳鐨勬偓娴彂鍏夎川鎰?*/
         #timeline-play-btn {
             color: rgba(212, 163, 115, 0.8); font-size: 18px; cursor: pointer; 
             width: 34px; height: 34px; flex-shrink: 0;
@@ -439,7 +439,7 @@ body, html {
             text-shadow: 0 0 12px rgba(255,215,0,0.9); 
         }
         
-        /* 👇 修复丢失的样式：恢复两侧静态年份的颜色 */
+        /* 馃憞 淇涓㈠け鐨勬牱寮忥細鎭㈠涓や晶闈欐€佸勾浠界殑棰滆壊 */
         .timeline-label { 
             color: rgba(212, 163, 115, 0.65); 
             font-family: 'NormFont', serif; 
@@ -450,7 +450,7 @@ body, html {
             user-select: none;
         }
         
-        /* 👇 核心修复：彻底覆盖丑陋的蓝白条，恢复极细红金丝轨道 */
+        /* 馃憞 鏍稿績淇锛氬交搴曡鐩栦笐闄嬬殑钃濈櫧鏉★紝鎭㈠鏋佺粏绾㈤噾涓濊建閬?*/
         #time-slider { 
             flex: 1; -webkit-appearance: none; 
             background: rgba(212, 163, 115, 0.15); 
@@ -458,7 +458,7 @@ body, html {
             border-radius: 1px; outline: none; cursor: pointer;
         }
 
-        /* 👇 核心修复：恢复滑块拖动点的小金球样式 */
+        /* 馃憞 鏍稿績淇锛氭仮澶嶆粦鍧楁嫋鍔ㄧ偣鐨勫皬閲戠悆鏍峰紡 */
         #time-slider::-webkit-slider-thumb { 
             -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; 
             background: #FFD700; cursor: pointer; 
@@ -469,25 +469,25 @@ body, html {
         #time-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
         
        /* ==========================================================
-           悬浮年份指示器：大空间悬浮铭牌 + 长金丝引线
+           鎮诞骞翠唤鎸囩ず鍣細澶х┖闂存偓娴摥鐗?+ 闀块噾涓濆紩绾?
            ========================================================== */
            
         #timeline-current-year {
             position: absolute; 
-            top: -65px; /* ⬆️ 大幅上移，拉开与底部导航条的垂直距离，呼吸感拉满 */
+            top: -65px; /* 猬嗭笍 澶у箙涓婄Щ锛屾媺寮€涓庡簳閮ㄥ鑸潯鐨勫瀭鐩磋窛绂伙紝鍛煎惛鎰熸媺婊?*/
             
             background: rgba(15, 3, 3, 0.85); 
             border: 1px solid rgba(255, 215, 0, 0.4); 
-            border-radius: 6px; /* 稍微增加一点圆角以匹配更大的体积 */
+            border-radius: 6px; /* 绋嶅井澧炲姞涓€鐐瑰渾瑙掍互鍖归厤鏇村ぇ鐨勪綋绉?*/
             
             color: #FFD700; 
             font-family: 'NormFont', sans-serif; 
-            font-size: 22px; /* ⬆️ 字号飙升，极其醒目 */
+            font-size: 22px; /* 猬嗭笍 瀛楀彿椋欏崌锛屾瀬鍏堕啋鐩?*/
             font-weight: bold;
-            letter-spacing: 4px; /* 字间距加宽，大气舒展 */
-            padding: 10px 24px; /* ⬆️ 进一步加大内边距，让铭牌显得非常宽厚 */
+            letter-spacing: 4px; /* 瀛楅棿璺濆姞瀹斤紝澶ф皵鑸掑睍 */
+            padding: 10px 24px; /* 猬嗭笍 杩涗竴姝ュ姞澶у唴杈硅窛锛岃閾墝鏄惧緱闈炲父瀹藉帤 */
             
-            box-shadow: 0 8px 20px rgba(0,0,0,0.9); /* 阴影加深，凸显悬浮高度 */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.9); /* 闃村奖鍔犳繁锛屽嚫鏄炬偓娴珮搴?*/
             white-space: nowrap; 
             pointer-events: none;
             
@@ -496,22 +496,22 @@ body, html {
             z-index: 1000;
         }
 
-        /* 配合更高的悬浮位置，拉长这根“金丝”，让它像钟摆一样垂向轨道 */
+        /* 閰嶅悎鏇撮珮鐨勬偓娴綅缃紝鎷夐暱杩欐牴鈥滈噾涓濃€濓紝璁╁畠鍍忛挓鎽嗕竴鏍峰瀭鍚戣建閬?*/
         #timeline-current-year::after {
             content: '';
             position: absolute;
-            bottom: -16px; /* ⬆️ 与拉长的线高度匹配 */
+            bottom: -16px; /* 猬嗭笍 涓庢媺闀跨殑绾块珮搴﹀尮閰?*/
             left: 50%;
             transform: translateX(-50%);
             width: 1px;       
-            height: 16px;  /* ⬆️ 金丝拉长至 16px，填补拉开的垂直空间 */
+            height: 16px;  /* 猬嗭笍 閲戜笣鎷夐暱鑷?16px锛屽～琛ユ媺寮€鐨勫瀭鐩寸┖闂?*/
             background: rgba(255, 215, 0, 0.7);
             box-shadow: 0 0 6px rgba(255, 215, 0, 0.9);
             display: block !important;
         }
 
 /* ==========================================================================
-   7. 弹幕与毛体名句特效 (Effects)
+   7. 寮瑰箷涓庢瘺浣撳悕鍙ョ壒鏁?(Effects)
    ========================================================================== */
 @keyframes danmakuMove { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
 .danmaku-item {
@@ -532,7 +532,7 @@ body, html {
 }
 
 /* ==========================================================================
-   7.5 逐句释义模块 (Annotation)
+   7.5 閫愬彞閲婁箟妯″潡 (Annotation)
    ========================================================================== */
 .annotation-toggle-btn {
     margin: 12px auto 6px;
@@ -578,7 +578,7 @@ body, html {
 }
 
 /* ==========================================================================
-   8. 移动端适配 (Media Queries)
+   8. 绉诲姩绔€傞厤 (Media Queries)
    ========================================================================== */
 #mobile-toggle { display: none; }
 @media (max-width: 768px) {
@@ -586,7 +586,7 @@ body, html {
     #title { font-size: 24px; } #subtitle { font-size: 12px; }
     #sidebar { width: 100%; transform: translateX(100%); } #sidebar.open { transform: translateX(0); }
     #mobile-toggle { display: block; position: absolute; right: 20px; bottom: 40px; background: rgba(255,215,0,0.2); color: #FFD700; border: 1px solid #FFD700; padding: 12px 20px; border-radius: 30px; font-weight: bold; z-index: 1001; }
-    .sidebar-title::after { content: '✖'; margin-left: auto; cursor: pointer; color: #ff6b6b; font-size: 16px; border: 1px solid #ff6b6b; border-radius: 50%; width: 24px; height: 24px; text-align: center; line-height: 22px; }
+    .sidebar-title::after { content: '鉁?; margin-left: auto; cursor: pointer; color: #ff6b6b; font-size: 16px; border: 1px solid #ff6b6b; border-radius: 50%; width: 24px; height: 24px; text-align: center; line-height: 22px; }
     .poem-scroll-content { width: 90%; padding: 25px 30px; }
     .modal-quote { right: 15px; font-size: 28px; letter-spacing: 4px;}
     .modal-poem-title { font-size: 28px; } .modal-full-text { font-size: 18px; line-height: 1.8; }
@@ -599,7 +599,7 @@ body, html {
 }
 
 /* ==========================================================================
-   9. 朗读跟读高亮 (Audio Reading Highlight) — 三态视觉
+   9. 鏈楄璺熻楂樹寒 (Audio Reading Highlight) 鈥?涓夋€佽瑙?
    ========================================================================== */
 .poem-line {
     transition: color 0.4s ease, text-shadow 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
@@ -609,7 +609,7 @@ body, html {
 }
 
 /* ==========================================================================
-   10. 收藏按钮与学习进度 (Favorites & Progress)
+   10. 鏀惰棌鎸夐挳涓庡涔犺繘搴?(Favorites & Progress)
    ========================================================================== */
 .modal-fav-btn {
     padding: 6px 16px;
@@ -637,7 +637,7 @@ body, html {
     box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
 }
 
-/* 已读/收藏徽章 */
+/* 宸茶/鏀惰棌寰界珷 */
 .card-header-right { display: flex; align-items: center; gap: 6px; }
 .school-card .read-badge {
     display: none;
@@ -661,7 +661,7 @@ body, html {
 }
 .school-card.is-fav .fav-badge { display: block; }
 
-/* 学习进度条 */
+/* 瀛︿範杩涘害鏉?*/
 .progress-display {
     margin-top: 12px;
     padding: 0 4px;
@@ -690,10 +690,10 @@ body, html {
 }
 
 /* ==========================================================================
-   11. 新增功能样式（不修改任何原有布局）
+   11. 鏂板鍔熻兘鏍峰紡锛堜笉淇敼浠讳綍鍘熸湁甯冨眬锛?
    ========================================================================== */
 
-/* --- 入场金色光波过场 --- */
+/* --- 鍏ュ満閲戣壊鍏夋尝杩囧満 --- */
 #intro-wave-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: 9500; pointer-events: none; opacity: 0;
@@ -710,7 +710,7 @@ body, html {
     100% { transform: scale(4); opacity: 0; }
 }
 
-/* --- 关于本站按钮（位于随机品鉴上方） --- */
+/* --- 鍏充簬鏈珯鎸夐挳锛堜綅浜庨殢鏈哄搧閴翠笂鏂癸級 --- */
 #about-btn {
     position: absolute; top: 30px; left: 30px; padding: 10px 24px;
     background: rgba(212, 163, 115, 0.15); color: #d4a373;
@@ -724,7 +724,7 @@ body, html {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); transform: translateY(-2px);
 }
 
-/* --- 关于本站弹窗 --- */
+/* --- 鍏充簬鏈珯寮圭獥 --- */
 #about-modal {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
@@ -753,7 +753,7 @@ body, html {
 .about-modal-title {
     color: #FFD700; font-size: 26px; font-weight: bold; letter-spacing: 3px;
     text-shadow: 0 0 12px rgba(255,215,0,0.5);
-    font-family: 'MaoFont', 'STKaiti', '楷体', serif;
+    font-family: 'MaoFont', 'STKaiti', '妤蜂綋', serif;
 }
 .about-modal-tagline { color: #d4a373; font-size: 13px; letter-spacing: 4px; margin-top: 6px; margin-bottom: 22px; }
 .about-modal-stats {
@@ -786,7 +786,7 @@ body, html {
     border-left: 3px solid #FFD700; border-radius: 4px; text-align: left;
 }
 
-/* --- 海报分享面板 --- */
+/* --- 娴锋姤鍒嗕韩闈㈡澘 --- */
 #poster-share-modal {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
@@ -799,7 +799,7 @@ body, html {
     border-radius: 14px; padding: 24px; max-width: 90vw; max-height: 90vh;
     box-shadow: 0 0 50px rgba(255,215,0,0.2); display: flex; flex-direction: column; gap: 16px; position: relative;
 }
-.poster-share-title { color: #FFD700; font-size: 18px; font-weight: bold; letter-spacing: 2px; text-align: center; font-family: 'MaoFont', 'STKaiti', '楷体', serif; }
+.poster-share-title { color: #FFD700; font-size: 18px; font-weight: bold; letter-spacing: 2px; text-align: center; font-family: 'MaoFont', 'STKaiti', '妤蜂綋', serif; }
 .poster-preview-wrap { max-width: 80vw; max-height: 60vh; overflow: auto; border-radius: 8px; border: 1px solid rgba(255,215,0,0.2); background: #1a0303; }
 .poster-preview-wrap img { display: block; max-width: 100%; height: auto; }
 .poster-share-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
@@ -817,7 +817,7 @@ body, html {
 .ps-toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); background: rgba(20,5,5,0.95); color: #FFD700; padding: 12px 24px; border-radius: 24px; border: 1px solid rgba(255,215,0,0.4); font-size: 14px; z-index: 9000; opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
 .ps-toast.show { opacity: 1; transform: translateX(-50%) translateY(-10px); }
 
-/* --- 今日一诗 / 诗词闯关 / 金句墙 / 年代穿越 / 足迹统计 / 长征专题 按钮 --- */
+/* --- 浠婃棩涓€璇?/ 璇楄瘝闂叧 / 閲戝彞澧?/ 骞翠唬绌胯秺 / 瓒宠抗缁熻 / 闀垮緛涓撻 鎸夐挳 --- */
 #today-btn, #quiz-btn, #quote-wall-btn, #timeline-btn, #stats-btn, #longmarch-btn {
     position: absolute; left: 30px; padding: 10px 24px;
     background: rgba(212, 163, 115, 0.15); color: #d4a373;
@@ -838,7 +838,7 @@ body, html {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); transform: translateY(-2px);
 }
 
-/* --- 看诗猜年弹窗 --- */
+/* --- 鐪嬭瘲鐚滃勾寮圭獥 --- */
 #quiz-modal {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
@@ -853,7 +853,7 @@ body, html {
     box-shadow: 0 0 60px rgba(255,215,0,0.15); animation: quizIn 0.4s cubic-bezier(0.16,1,0.3,1);
     --fs: 1;
 }
-/* 字号调节按钮组（A-/A+）通用样式 */
+/* 瀛楀彿璋冭妭鎸夐挳缁勶紙A-/A+锛夐€氱敤鏍峰紡 */
 .mf-ctrl { position: absolute; top: 14px; right: 56px; display: flex; gap: 4px; z-index: 10; }
 .mf-ctrl span {
     width: 28px; height: 28px; line-height: 28px; text-align: center;
@@ -869,13 +869,13 @@ body, html {
 }
 .quiz-close:hover { color: #ff6b6b; background: rgba(255,107,107,0.1); }
 .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-.quiz-title { color: #FFD700; font-size: 22px; font-weight: bold; letter-spacing: 3px; font-family: 'MaoFont', 'STKaiti', '楷体', serif; }
+.quiz-title { color: #FFD700; font-size: 22px; font-weight: bold; letter-spacing: 3px; font-family: 'MaoFont', 'STKaiti', '妤蜂綋', serif; }
 .quiz-score { color: #d4a373; font-size: 14px; }
 .quiz-score span { color: #FFD700; font-weight: bold; font-size: 18px; }
 .quiz-hint { color: #c9b89a; font-size: calc(16px * var(--fs, 1)); margin-bottom: 16px; text-align: center; font-family: 'NormFont', serif; }
 .quiz-poem-text {
     color: #f0e6d2; font-size: calc(22px * var(--fs, 1)); line-height: 2; text-align: center; white-space: pre-wrap;
-    font-family: 'PoemKai', 'STKaiti', 'KaiTi', '楷体', serif; padding: 20px; margin-bottom: 24px;
+    font-family: 'PoemKai', 'STKaiti', 'KaiTi', '妤蜂綋', serif; padding: 20px; margin-bottom: 24px;
     background: rgba(255,215,0,0.04); border-radius: 10px; border: 1px solid rgba(255,215,0,0.1);
     max-height: 35vh; overflow-y: auto; letter-spacing: 2px;
 }
@@ -900,7 +900,7 @@ body, html {
 }
 .quiz-next:hover { box-shadow: 0 0 15px rgba(255,215,0,0.6); transform: translateY(-2px); }
 
-/* --- 金句墙弹窗 --- */
+/* --- 閲戝彞澧欏脊绐?--- */
 #quote-wall-modal {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
@@ -922,7 +922,7 @@ body, html {
     text-align: center; color: #888; cursor: pointer; font-size: 18px; border-radius: 50%; transition: all 0.3s; z-index: 10;
 }
 .qw-close:hover { color: #ff6b6b; background: rgba(255,107,107,0.1); }
-.qw-title { color: #FFD700; font-size: 24px; font-weight: bold; letter-spacing: 4px; text-align: center; font-family: 'MaoFont', 'STKaiti', '楷体', serif; text-shadow: 0 0 10px rgba(255,215,0,0.4); }
+.qw-title { color: #FFD700; font-size: 24px; font-weight: bold; letter-spacing: 4px; text-align: center; font-family: 'MaoFont', 'STKaiti', '妤蜂綋', serif; text-shadow: 0 0 10px rgba(255,215,0,0.4); }
 .qw-subtitle { color: #d4a373; font-size: 12px; text-align: center; margin-top: 4px; margin-bottom: 20px; letter-spacing: 2px; }
 .quote-wall-content {
     overflow-y: auto; column-count: 2; column-gap: 18px; padding: 4px;
@@ -932,7 +932,7 @@ body, html {
     padding: 20px 22px; border-radius: 10px; font-size: calc(17px * var(--fs, 1)); line-height: 2;
     background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.12);
     color: #e8d8b8; transition: all 0.3s; letter-spacing: 1px;
-    font-family: 'PoemKai', 'STKaiti', 'KaiTi', '楷体', serif;
+    font-family: 'PoemKai', 'STKaiti', 'KaiTi', '妤蜂綋', serif;
 }
 .quote-card.clickable { cursor: pointer; }
 .quote-card.clickable:hover {
@@ -940,7 +940,7 @@ body, html {
     transform: translateY(-3px); box-shadow: 0 4px 20px rgba(255,215,0,0.2);
 }
 
-/* --- 年代穿越时间线弹窗 --- */
+/* --- 骞翠唬绌胯秺鏃堕棿绾垮脊绐?--- */
 #timeline-modal, #stats-modal, #longmarch-modal {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
@@ -964,11 +964,11 @@ body, html {
 .tl-close:hover, .stats-close:hover, .lm-close:hover { color: #ff6b6b; background: rgba(255,107,107,0.1); }
 .tl-title, .stats-title, .lm-title {
     color: #FFD700; font-size: 24px; font-weight: bold; letter-spacing: 4px; text-align: center;
-    font-family: 'MaoFont', 'STKaiti', '楷体', serif; text-shadow: 0 0 10px rgba(255,215,0,0.4);
+    font-family: 'MaoFont', 'STKaiti', '妤蜂綋', serif; text-shadow: 0 0 10px rgba(255,215,0,0.4);
 }
 .tl-subtitle, .lm-subtitle { color: #d4a373; font-size: 12px; text-align: center; margin-top: 4px; margin-bottom: 20px; letter-spacing: 2px; }
 
-/* 时间线列表 */
+/* 鏃堕棿绾垮垪琛?*/
 .timeline-list { overflow-y: auto; padding: 0 8px; position: relative; }
 .timeline-list::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #FFD700, rgba(255,215,0,0.1)); }
 .tl-item {
@@ -984,11 +984,11 @@ body, html {
 .tl-item:hover::before { transform: scale(1.3); }
 .tl-item.read::before { background: #66bb6a; box-shadow: 0 0 8px rgba(102,187,107,0.6); }
 .tl-year { color: #FFD700; font-size: calc(20px * var(--fs, 1)); font-weight: bold; font-family: 'NormFont', sans-serif; }
-.tl-poem { color: #f0e6d2; font-size: calc(17px * var(--fs, 1)); margin-top: 2px; font-family: 'PoemKai', 'STKaiti', 'KaiTi', '楷体', serif; }
+.tl-poem { color: #f0e6d2; font-size: calc(17px * var(--fs, 1)); margin-top: 2px; font-family: 'PoemKai', 'STKaiti', 'KaiTi', '妤蜂綋', serif; }
 .tl-quote { color: #c9b89a; font-size: calc(15px * var(--fs, 1)); margin-top: 4px; line-height: 1.7; }
 .tl-location { color: #d4a373; font-size: calc(13px * var(--fs, 1)); margin-top: 2px; }
 
-/* 统计面板 */
+/* 缁熻闈㈡澘 */
 .stats-content { overflow-y: auto; padding: 4px; }
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
 .stats-card {
@@ -1011,7 +1011,7 @@ body, html {
 }
 .stats-province-tag.unread { opacity: 0.35; }
 
-/* 长征专题列表 */
+/* 闀垮緛涓撻鍒楄〃 */
 .lm-list { overflow-y: auto; padding: 0 8px; }
 .lm-item {
     padding: 14px 16px; margin-bottom: 10px; cursor: pointer; border-radius: 10px;
@@ -1020,11 +1020,11 @@ body, html {
 .lm-item:hover { background: rgba(229,57,53,0.15); border-color: rgba(229,57,53,0.5); transform: translateX(4px); }
 .lm-item-head { display: flex; justify-content: space-between; align-items: center; }
 .lm-year { color: #e53935; font-size: calc(18px * var(--fs, 1)); font-weight: bold; }
-.lm-poem { color: #f0e6d2; font-size: calc(17px * var(--fs, 1)); font-family: 'PoemKai', 'STKaiti', 'KaiTi', '楷体', serif; }
+.lm-poem { color: #f0e6d2; font-size: calc(17px * var(--fs, 1)); font-family: 'PoemKai', 'STKaiti', 'KaiTi', '妤蜂綋', serif; }
 .lm-quote { color: #c9b89a; font-size: calc(15px * var(--fs, 1)); margin-top: 4px; line-height: 1.7; }
 .lm-location { color: #d4a373; font-size: calc(13px * var(--fs, 1)); margin-top: 2px; }
 
-/* --- 新增功能的移动端适配（独立媒体查询，不修改原版） --- */
+/* --- 鏂板鍔熻兘鐨勭Щ鍔ㄧ閫傞厤锛堢嫭绔嬪獟浣撴煡璇紝涓嶄慨鏀瑰師鐗堬級 --- */
 @media (max-width: 768px) {
     #about-btn { top: 20px; left: 15px; padding: 8px 16px; font-size: 14px; }
     #today-btn, #quiz-btn, #quote-wall-btn, #timeline-btn, #stats-btn, #longmarch-btn { left: 15px; padding: 8px 16px; font-size: 14px; }
@@ -1045,302 +1045,3 @@ body, html {
     .ps-btn { width: 100%; justify-content: center; }
 }
 
-/* ==========================================================================
-   12. 移动端全面适配增强 (Mobile Enhancement)
-   覆盖原 768px 媒体查询中未完善的布局问题
-   ========================================================================== */
-@media (max-width: 768px) {
-    /* === 顶部标题区：防与左右按钮重叠 === */
-    #title-container {
-        width: 100%;
-        top: 10px;
-        left: 50%;
-        padding: 0 110px;
-        box-sizing: border-box;
-    }
-    #title {
-        font-size: 17px;
-        letter-spacing: 2px;
-        white-space: normal;
-    }
-    #subtitle { font-size: 10px; letter-spacing: 1px; margin-top: 3px; }
-
-    /* === 左侧功能按钮紧凑化（防重叠堆叠） === */
-    #about-btn, #overview-btn, #today-btn, #quiz-btn, #quote-wall-btn,
-    #timeline-btn, #stats-btn, #longmarch-btn {
-        padding: 5px 10px;
-        font-size: 11px;
-        letter-spacing: 1px;
-    }
-    #about-btn { top: 12px; }
-    #overview-btn { top: 44px; }
-    #today-btn { top: 44px; }
-    #quiz-btn { top: 70px; }
-    #quote-wall-btn { top: 96px; }
-    #timeline-btn { top: 122px; }
-    #stats-btn { top: 148px; }
-    #longmarch-btn { top: 174px; }
-
-    /* === 侧边栏 === */
-    .sidebar-header { padding: 14px 14px 8px; }
-    .sidebar-title { font-size: 16px; }
-    .stat-num { font-size: 22px; }
-    .stat-label { font-size: 11px; margin-top: 4px; }
-    .stats-box { margin-top: 10px; }
-    .school-card { padding: 10px 12px; margin-bottom: 8px; }
-    .card-school-name { font-size: 15px; }
-    .card-province { font-size: 10px; }
-    .card-students { font-size: 12px; }
-
-    /* === 诗词鉴赏弹窗：取消固定 4:3 比例，改为可滚动全屏式 === */
-    .poem-scroll-content {
-        width: 94vw !important;
-        max-width: none !important;
-        aspect-ratio: auto !important;
-        height: 90vh;
-        max-height: 90vh;
-        padding: 8px 12px 16px 12px;
-        border-radius: 10px;
-    }
-    .modal-header-info {
-        margin-top: 48px;
-        margin-bottom: 8px;
-        padding-bottom: 10px;
-    }
-    .modal-poem-title {
-        font-size: 24px;
-        letter-spacing: 1px;
-        margin-bottom: 6px;
-    }
-    .modal-poem-meta { font-size: 13px; }
-    .modal-actions { gap: 6px; margin-top: 6px; flex-wrap: wrap; }
-    .modal-fav-btn, .modal-audio-btn, .modal-speed-btn {
-        padding: 4px 10px;
-        font-size: 11px;
-    }
-    .modal-body {
-        padding: 14px 12px;
-        gap: 12px;
-        border-radius: 8px;
-    }
-    .modal-section-title { font-size: 15px; margin-bottom: 6px; }
-    .modal-section-title::before { font-size: 10px; margin-right: 6px; }
-    .modal-full-text {
-        font-size: 16px;
-        line-height: 1.7;
-        letter-spacing: 2px;
-    }
-    .modal-background-text {
-        font-size: 14px;
-        line-height: 1.8;
-        padding: 12px;
-        letter-spacing: 0.5px;
-    }
-    /* 水印在手机端遮挡内容，隐藏 */
-    .modal-quote { display: none !important; }
-    /* 关闭按钮与字号按钮 */
-    .close-modal {
-        top: 6px; right: 6px;
-        width: 28px; height: 28px;
-        font-size: 12px;
-    }
-    .modal-font-btns { top: 6px; left: 6px; gap: 4px; }
-    .font-btn { width: 28px; height: 28px; font-size: 11px; }
-    /* 逐句释义 */
-    .anno-original { font-size: 14px; }
-    .anno-translation { font-size: 13px; line-height: 1.6; }
-    .annotation-toggle-btn { font-size: 11px; padding: 4px 12px; }
-    .modal-annotation { padding: 10px 12px; }
-
-    /* === 关于本站弹窗：取消 16:9 固定比例 === */
-    .about-modal-box {
-        aspect-ratio: auto !important;
-        width: 94vw !important;
-        max-width: none !important;
-        padding: 24px 16px 16px 16px;
-        max-height: 88vh;
-    }
-    .about-modal-title { font-size: 20px; letter-spacing: 2px; }
-    .about-modal-stats { padding: 10px 0; margin-bottom: 14px; }
-    .am-num { font-size: 24px; }
-    .am-lbl { font-size: 10px; }
-    .about-modal-desc { font-size: 12px; line-height: 1.7; margin-bottom: 12px; }
-    .about-modal-section-title { font-size: 13px; margin: 12px 0 8px; }
-    .about-module-item { padding: 6px 8px; margin-bottom: 6px; }
-    .about-module-icon { font-size: 16px; }
-    .about-module-name { font-size: 12px; }
-    .about-module-desc { font-size: 11px; line-height: 1.5; margin-top: 2px; }
-    .about-modal-tip { font-size: 11px; padding: 8px 10px; line-height: 1.6; }
-
-    /* === 地图控制按钮 === */
-    .control-btn { width: 36px; height: 36px; font-size: 16px; }
-
-    /* === 底部时间轴 === */
-    #timeline-current-year {
-        font-size: 15px;
-        padding: 5px 12px;
-        top: -48px;
-        letter-spacing: 2px;
-    }
-    #timeline-current-year::after { bottom: -12px; height: 12px; }
-    #timeline-container { height: 36px; padding: 0 16px; }
-    .timeline-label { font-size: 11px; }
-    #timeline-play-btn { width: 28px; height: 28px; font-size: 14px; }
-
-    /* === 音乐 / 截图按钮 === */
-    #snapshot-btn, #music-btn {
-        width: 40px; height: 40px;
-        bottom: 28px;
-    }
-    #snapshot-btn { left: 84px; }
-    #music-btn { left: 28px; }
-
-    /* === 海报分享面板 === */
-    .poster-share-box { padding: 14px; gap: 10px; }
-    .poster-share-title { font-size: 15px; letter-spacing: 1px; }
-    .ps-btn { padding: 8px 12px; font-size: 11px; }
-
-    /* === 各功能弹窗（闯关/金句墙/年代/统计/长征）统一紧凑 === */
-    .quiz-box, .timeline-box, .stats-modal-box, .lm-box, .quote-wall-box {
-        width: 94vw !important;
-        padding: 24px 14px 16px 14px !important;
-    }
-    .quiz-title, .qw-title, .tl-title, .stats-title, .lm-title {
-        font-size: 18px;
-        letter-spacing: 2px;
-    }
-    .qw-subtitle, .tl-subtitle, .lm-subtitle {
-        font-size: 10px;
-        margin-top: 3px;
-        margin-bottom: 12px;
-    }
-    .quiz-hint { font-size: 13px !important; margin-bottom: 10px; }
-    .quiz-poem-text {
-        font-size: 14px !important;
-        padding: 12px;
-        line-height: 1.8;
-        margin-bottom: 14px;
-        max-height: 30vh;
-    }
-    .quiz-option { font-size: 15px !important; padding: 10px; }
-    .quiz-correct, .quiz-wrong { font-size: 14px !important; }
-    .quiz-info { font-size: 12px !important; }
-    .quiz-bg { font-size: 11px !important; padding: 10px; line-height: 1.6; }
-    .quiz-next { font-size: 14px !important; padding: 10px; }
-    .quote-wall-content { column-count: 1; }
-    .quote-card {
-        font-size: 14px !important;
-        padding: 14px;
-        line-height: 1.8;
-        margin-bottom: 12px;
-    }
-    .tl-item { padding: 10px 10px 10px 44px; margin-bottom: 6px; }
-    .tl-item::before { left: 12px; top: 14px; width: 12px; height: 12px; }
-    .tl-year { font-size: 16px !important; }
-    .tl-poem { font-size: 14px !important; }
-    .tl-quote { font-size: 12px !important; line-height: 1.6; }
-    .tl-location { font-size: 11px !important; }
-    .lm-item { padding: 12px 14px; margin-bottom: 8px; }
-    .lm-year { font-size: 15px !important; }
-    .lm-poem { font-size: 14px !important; }
-    .lm-quote { font-size: 12px !important; line-height: 1.6; }
-    .lm-location { font-size: 11px !important; }
-    .stats-grid { gap: 10px; margin-bottom: 14px; }
-    .stats-card { padding: 14px; }
-    .stats-num { font-size: 28px; }
-    .stats-lbl { font-size: 12px !important; }
-    .stats-bar-label { font-size: 12px !important; }
-    .stats-province-tag { font-size: 12px !important; padding: 3px 10px; }
-
-    /* === 字号调节按钮 === */
-    .mf-ctrl { top: 10px; right: 48px; gap: 3px; }
-    .mf-ctrl span { width: 24px; height: 24px; line-height: 24px; font-size: 11px; }
-}
-
-/* === 超小屏幕进一步压缩 === */
-@media (max-width: 380px) {
-    #title { font-size: 14px; letter-spacing: 1px; }
-    #title-container { padding: 0 95px; }
-    .modal-poem-title { font-size: 20px; }
-    .modal-full-text { font-size: 14px; letter-spacing: 1px; }
-    #about-btn, #overview-btn, #today-btn, #quiz-btn, #quote-wall-btn,
-    #timeline-btn, #stats-btn, #longmarch-btn {
-        padding: 4px 8px;
-        font-size: 10px;
-    }
-    .poem-scroll-content { padding: 8px 8px 12px 8px; }
-    .modal-body { padding: 12px 8px; }
-}
-
-/* ==========================================================================
-   13. 移动端 safe-area 安全区与字号优化
-   解决：① 浏览器地址栏/系统导航栏遮挡底部 ② 摄像头/刘海遮挡顶部
-        ③ 列表与地图字号过小
-   ========================================================================== */
-
-@media (max-width: 768px) {
-    /* === 顶部安全区：避开刘海/摄像头 === */
-    #title-container { top: calc(10px + env(safe-area-inset-top)); }
-    #about-btn { top: calc(12px + env(safe-area-inset-top)); }
-    #overview-btn { top: calc(44px + env(safe-area-inset-top)); }
-    #today-btn { top: calc(44px + env(safe-area-inset-top)); }
-    #quiz-btn { top: calc(70px + env(safe-area-inset-top)); }
-    #quote-wall-btn { top: calc(96px + env(safe-area-inset-top)); }
-    #timeline-btn { top: calc(122px + env(safe-area-inset-top)); }
-    #stats-btn { top: calc(148px + env(safe-area-inset-top)); }
-    #longmarch-btn { top: calc(174px + env(safe-area-inset-top)); }
-
-    /* === 底部安全区：避开浏览器地址栏/系统导航栏 === */
-    #timeline-container {
-        bottom: calc(35px + env(safe-area-inset-bottom));
-    }
-    #timeline-current-year {
-        top: calc(-48px - env(safe-area-inset-bottom));
-    }
-    #music-btn, #snapshot-btn {
-        bottom: calc(28px + env(safe-area-inset-bottom));
-    }
-    #mobile-toggle {
-        bottom: calc(40px + env(safe-area-inset-bottom));
-    }
-    /* 弹窗内底部留出安全区，避免操作按钮被遮挡 */
-    .modal-body { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
-    .quiz-box, .timeline-box, .stats-modal-box, .lm-box,
-    .quote-wall-box, .about-modal-box, .poster-share-box {
-        padding-bottom: calc(16px + env(safe-area-inset-bottom)) !important;
-        max-height: calc(90vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
-    }
-
-    /* === 列表字号增大，改善阅读疲劳 === */
-    .school-card { padding: 12px 14px; margin-bottom: 10px; }
-    .card-school-name { font-size: 17px; }
-    .card-province { font-size: 12px; padding: 3px 8px; }
-    .card-students { font-size: 13px; line-height: 1.7; }
-    .card-year-badge { font-size: 22px; }
-    .stat-num { font-size: 24px; }
-    .stat-label { font-size: 12px; }
-    .progress-text { font-size: 13px; }
-    .sidebar-title { font-size: 17px; }
-
-    /* === 时间轴标签字号增大 === */
-    .timeline-label { font-size: 13px; }
-    #timeline-current-year { font-size: 17px; padding: 6px 14px; }
-    #time-slider::-webkit-slider-thumb { width: 18px; height: 18px; }
-
-    /* === "☰ 展开全集"按钮更醒目（地图/列表切换入口） === */
-    #mobile-toggle {
-        font-size: 13px;
-        padding: 12px 22px;
-        font-weight: bold;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.6), 0 0 12px rgba(255,215,0,0.3);
-    }
-
-    /* === 弹窗内字号微调 === */
-    .modal-section-title { font-size: 16px; }
-    .modal-full-text { font-size: 17px; line-height: 1.9; }
-    .modal-background-text { font-size: 15px; line-height: 2; }
-
-    /* === 地图控制按钮增大 === */
-    .control-btn { width: 40px; height: 40px; font-size: 18px; }
-    #map-controls { bottom: calc(100px + env(safe-area-inset-bottom)); }
-}
