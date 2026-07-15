@@ -1271,3 +1271,95 @@ body, html {
     .poem-scroll-content { padding: 8px 8px 12px 8px; }
     .modal-body { padding: 12px 8px; }
 }
+
+/* ==========================================================================
+   13. 移动端 safe-area 安全区与字号优化
+   解决：① 浏览器地址栏/系统导航栏遮挡底部 ② 摄像头/刘海遮挡顶部
+        ③ 列表与地图字号过小 ④ dvh 动态视口高度
+   ========================================================================== */
+
+/* 全屏容器改用动态视口高度，随地址栏显示/隐藏自适应 */
+@supports (height: 100dvh) {
+    #entry-screen,
+    #main-content,
+    #map-box,
+    #vignette-overlay,
+    #poem-modal,
+    #quiz-modal,
+    #quote-wall-modal,
+    #timeline-modal,
+    #stats-modal,
+    #longmarch-modal,
+    #about-modal,
+    #poster-share-modal {
+        height: 100dvh !important;
+    }
+    .poem-scroll-content { height: 90dvh !important; max-height: 90dvh !important; }
+}
+
+@media (max-width: 768px) {
+    /* === 顶部安全区：避开刘海/摄像头 === */
+    #title-container { top: calc(10px + env(safe-area-inset-top)); }
+    #about-btn { top: calc(12px + env(safe-area-inset-top)); }
+    #overview-btn { top: calc(44px + env(safe-area-inset-top)); }
+    #today-btn { top: calc(44px + env(safe-area-inset-top)); }
+    #quiz-btn { top: calc(70px + env(safe-area-inset-top)); }
+    #quote-wall-btn { top: calc(96px + env(safe-area-inset-top)); }
+    #timeline-btn { top: calc(122px + env(safe-area-inset-top)); }
+    #stats-btn { top: calc(148px + env(safe-area-inset-top)); }
+    #longmarch-btn { top: calc(174px + env(safe-area-inset-top)); }
+
+    /* === 底部安全区：避开浏览器地址栏/系统导航栏 === */
+    #timeline-container {
+        bottom: calc(35px + env(safe-area-inset-bottom));
+    }
+    #timeline-current-year {
+        top: calc(-48px - env(safe-area-inset-bottom));
+    }
+    #music-btn, #snapshot-btn {
+        bottom: calc(28px + env(safe-area-inset-bottom));
+    }
+    #mobile-toggle {
+        bottom: calc(40px + env(safe-area-inset-bottom));
+    }
+    /* 弹窗内底部留出安全区，避免操作按钮被遮挡 */
+    .modal-body { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+    .quiz-box, .timeline-box, .stats-modal-box, .lm-box,
+    .quote-wall-box, .about-modal-box, .poster-share-box {
+        padding-bottom: calc(16px + env(safe-area-inset-bottom)) !important;
+        max-height: calc(90vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+    }
+
+    /* === 列表字号增大，改善阅读疲劳 === */
+    .school-card { padding: 12px 14px; margin-bottom: 10px; }
+    .card-school-name { font-size: 17px; }
+    .card-province { font-size: 12px; padding: 3px 8px; }
+    .card-students { font-size: 13px; line-height: 1.7; }
+    .card-year-badge { font-size: 22px; }
+    .stat-num { font-size: 24px; }
+    .stat-label { font-size: 12px; }
+    .progress-text { font-size: 13px; }
+    .sidebar-title { font-size: 17px; }
+
+    /* === 时间轴标签字号增大 === */
+    .timeline-label { font-size: 13px; }
+    #timeline-current-year { font-size: 17px; padding: 6px 14px; }
+    #time-slider::-webkit-slider-thumb { width: 18px; height: 18px; }
+
+    /* === "☰ 展开全集"按钮更醒目（地图/列表切换入口） === */
+    #mobile-toggle {
+        font-size: 13px;
+        padding: 12px 22px;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.6), 0 0 12px rgba(255,215,0,0.3);
+    }
+
+    /* === 弹窗内字号微调 === */
+    .modal-section-title { font-size: 16px; }
+    .modal-full-text { font-size: 17px; line-height: 1.9; }
+    .modal-background-text { font-size: 15px; line-height: 2; }
+
+    /* === 地图控制按钮增大 === */
+    .control-btn { width: 40px; height: 40px; font-size: 18px; }
+    #map-controls { bottom: calc(100px + env(safe-area-inset-bottom)); }
+}
