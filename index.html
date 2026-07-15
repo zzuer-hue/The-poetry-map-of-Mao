@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>毛主席诗词全景地图 - 编年史特展</title>
+
+    <!-- ==================== SEO 基础元信息 ==================== -->
+    <meta name="description" content="一张地图纵览毛主席65首诗词创作足迹，跨越1910-1976六十六年峥嵘岁月。沉浸式编年史特展，含毛体书法、长征路线、朗读音频与逐句释义。">
+    <meta name="keywords" content="毛主席诗词,毛泽东诗词,诗词地图,沁园春雪,沁园春长沙,长征,革命诗词,编年史,毛体书法,中国革命史">
+    <meta name="author" content="毛主席诗词全景地图项目组">
+    <meta name="theme-color" content="#1e0505">
+
+    <!-- ==================== Open Graph 社交分享 (微信/微博/QQ) ==================== -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="毛主席诗词全景地图 · 编年史特展">
+    <meta property="og:description" content="一张地图纵览65首伟人诗词，跨越66年峥嵘岁月。沉浸式编年史特展，重温星火燎原到中流击水的磅礴历程。">
+    <meta property="og:image" content="images/og-share.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="毛主席诗词全景地图 - 金色毛体标题配中国地图剪影">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- ==================== Twitter Card ==================== -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="毛主席诗词全景地图 · 编年史特展">
+    <meta name="twitter:description" content="一张地图纵览65首伟人诗词，跨越66年峥嵘岁月。">
+    <meta name="twitter:image" content="images/og-share.jpg">
+
+    <!-- ==================== Favicon ==================== -->
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/favicon.svg">
+    <link rel="mask-icon" href="images/favicon.svg" color="#FFD700">
+
+    <!-- ==================== 移动端兼容性增强 ==================== -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="诗词全景地图">
+
+    <!-- 使用国内顶级静态资源库保证无墙满速加载，CDN 失效时自动回退到本地副本 -->
+    <script src="https://cdn.staticfile.net/echarts/5.5.0/echarts.min.js"></script>
+    <script>
+        // ECharts 兜底：CDN 加载失败时加载本地副本
+        if (typeof echarts === 'undefined') {
+            document.write('<script src="lib/echarts.min.js"><\/script>');
+        }
+    </script>
+    <script src="https://cdn.staticfile.net/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.staticfile.net/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
+
+    <!-- 引入拆分后的 CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- ==================== 结构化数据 (Schema.org) ==================== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "毛主席诗词全景地图",
+      "description": "一张地图纵览毛主席65首诗词创作足迹，跨越1910-1976六十六年峥嵘岁月的沉浸式编年史特展。",
+      "inLanguage": "zh-CN",
+      "keywords": "毛主席诗词, 沁园春雪, 长征, 革命诗词, 编年史"
+    }
+    </script>
+</head>
+<body>
+    <!-- 这里保留你原本所有的 HTML DOM 结构代码 -->
+    <div id="entry-screen">
+        <canvas id="entry-star-canvas" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;"></canvas>
+        <div class="entry-title">毛主席诗词历史长河地图</div>
+        <div class="entry-subtitle">全编年史特展 · 动态时空溯游</div>
+        <button id="launch-btn" onclick="startSystem()">重温峥嵘岁月</button>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- 先导转场视频层 (默认隐藏) -->
+    <!-- ========================================================= -->
+    <!-- 入场金色光波过场层 -->
+    <div id="intro-wave-overlay"></div>
+
+    <div id="intro-video-container" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9000; background: #000;">
+        <video id="intro-video" style="width: 100%; height: 100%; object-fit: cover;" playsinline>
+            <!-- 👇 请把 src 替换为您实际准备好的转场视频路径 -->
+            <source src="video/enterMainMap.mp4" type="video/mp4">
+        </video>
+        <!-- 右上角跳过按钮，防止用户不想看第二次 -->
+        <button id="skip-video-btn" style="position: absolute; top: 30px; right: 40px; padding: 6px 16px; background: rgba(0,0,0,0.5); color: #d4a373; border: 1px solid rgba(212,163,115,0.4); border-radius: 20px; cursor: pointer; z-index: 9001; font-family: '楷体', serif; font-size: 16px; backdrop-filter: blur(4px); transition: all 0.3s;">
+            跳过动画 ⏭
+        </button>
+    </div>
+
+    <div id="main-content">
+        <div id="danmaku-container" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 100; overflow: hidden;"></div>
+        
+        <!-- 3D 粒子系统的挂载目标容器 -->
+        <canvas id="star-canvas"></canvas>
+        <div id="vignette-overlay"></div>
+        
+        <div id="title-container" class="snapshot-show">
+            <div id="title" onclick="fireConfetti(event)">毛主席诗词创作编年史全图</div>
+            <div id="subtitle">收录名篇 <span id="total-distance" class="highlight-km">60</span> 余首，见证中国革命史</div>
+        </div>
+        
+        <div id="overview-btn" class="snapshot-hide" onclick="randomPoem()" title="随机抽取一首伟人名篇">🎲 随机品鉴</div>
+        <div id="today-btn" class="snapshot-hide" onclick="openTodayPoem()" title="每日推荐一首诗词">📅 今日一诗</div>
+        <div id="quiz-btn" class="snapshot-hide" onclick="openQuiz()" title="诗词闯关答题">🎓 诗词闯关</div>
+        <div id="quote-wall-btn" class="snapshot-hide" onclick="openQuoteWall()" title="毛体金句墙">✨ 金句墙</div>
+        <div id="timeline-btn" class="snapshot-hide" onclick="openTimeline()" title="编年史时间线">📜 年代穿越</div>
+        <div id="stats-btn" class="snapshot-hide" onclick="openStats()" title="阅读足迹统计">📊 足迹统计</div>
+        <div id="longmarch-btn" class="snapshot-hide" onclick="openLongMarch()" title="长征诗词专题">🚩 长征专题</div>
+        <div id="about-btn" class="snapshot-hide" onclick="openAboutModal()" title="查看项目介绍">📜 关于本站</div>
+        
+        <!-- 地图控制罗盘 -->
+        <div id="map-controls" class="snapshot-hide">
+            <div class="control-btn" id="lock-btn" onclick="toggleMapLock()" title="锁定/解锁地图拖拽(防误触)">🔓</div>
+            <div class="control-btn" onclick="resetMap()" title="一键复位地图视角">⛶</div>
+        </div>
+
+        <div id="map-box"></div>
+        
+        <!-- 底部动态生长图时间轴 (Timeline) -->
+        <div id="timeline-container" class="snapshot-hide">
+            <div id="timeline-current-year">1925 年</div>
+            <div id="timeline-play-btn" onclick="toggleTour()" title="播放/暂停时空巡游">▶</div>
+            <div class="timeline-label" id="timeline-start-year">1910</div>
+            <input type="range" id="time-slider" min="0" max="100" value="100" step="1">
+            <div class="timeline-label" id="timeline-end-year">1976</div>
+        </div>
+
+        <div id="mobile-toggle" class="snapshot-hide" onclick="toggleSidebar()">☰ 展开全集</div>
+
+        <div id="sidebar">
+            <div class="sidebar-header">
+                <div class="header-top">
+                    <div class="sidebar-title" onclick="if(window.innerWidth<=768) toggleSidebar()">诗词编年足迹</div>
+                </div>
+                
+                <div class="stats-box">
+                    <div class="stat-item">
+                        <div class="stat-num" id="stat-total" style="color: #FFD700; text-shadow: 0 0 10px rgba(255,215,0,0.5);">0</div>
+                        <div class="stat-label" style="color: #d4b532;">总名篇</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num" id="stat-early" style="color: #FFD700;">0</div>
+                        <!-- 文字带上暗金色 -->
+                        <div class="stat-label" style="color: #d4b532;">不朽经典</div> 
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num" id="stat-mid" style="color: #FF3333;">0</div>
+                        <!-- 文字带上暗红色 -->
+                        <div class="stat-label" style="color: #cc4444;">长征节点</div>
+                    </div>
+                </div>
+
+                <!-- 学习进度条 -->
+                <div class="progress-display">
+                    <div class="progress-text">📖 探索进度：<span id="read-count">0</span> / <span id="total-count">0</span> 首</div>
+                    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+                </div>
+
+                <div class="sidebar-tabs snapshot-hide">
+                    <div class="tab-btn active" onclick="switchTab('all', this)">全 部</div>
+                    <div class="tab-btn" onclick="switchTab('early', this)">星火燎原</div>
+                    <div class="tab-btn" onclick="switchTab('mid', this)">长征抗战</div>
+                    <div class="tab-btn" onclick="switchTab('late', this)">建国岁月</div>
+                    <div class="tab-btn" onclick="switchTab('favorite', this)">⭐ 收藏</div>
+                </div>
+
+                <div class="action-group snapshot-hide">
+                    <input type="text" id="search-input" placeholder="搜索地点或年份..." oninput="filterList()">
+                </div>
+            </div>
+            <div id="school-list"></div>
+        </div>
+
+        <audio id="bgm" loop src="audio/mainaudio.mp3"></audio>
+        <audio id="poem-audio"></audio>
+
+        <div id="music-btn" class="snapshot-hide" title="点击播放/暂停主背景音乐"></div>
+        <div id="snapshot-btn" class="snapshot-hide" title="生成并下载当前全景海报" onclick="takeSnapshot()"></div>
+
+        <!-- 海报分享面板 -->
+        <div id="poster-share-modal">
+            <div class="poster-share-box">
+                <div class="ps-close" onclick="closePosterShare()">✖</div>
+                <div class="poster-share-title">全景海报已生成</div>
+                <div class="poster-preview-wrap"><img id="poster-preview-img" alt="海报预览"></div>
+                <div class="poster-share-actions">
+                    <div class="ps-btn ps-btn-primary" onclick="downloadPoster()">⬇ 保存海报</div>
+                    <div class="ps-btn ps-btn-ghost" onclick="copyShareLink()">🔗 复制链接</div>
+                    <div class="ps-btn ps-btn-wechat" onclick="shareToWechat()">💬 微信分享</div>
+                    <div class="ps-btn ps-btn-weibo" onclick="shareToWeibo()">🌐 微博分享</div>
+                </div>
+            </div>
+        </div>
+        <div id="ps-toast" class="ps-toast"></div>
+
+        <!-- 看诗猜年答题弹窗 -->
+        <div id="quiz-modal" onclick="if(event.target===this)closeQuiz()">
+            <div class="quiz-box">
+                <div class="quiz-close" onclick="closeQuiz()">✖</div>
+                <div class="mf-ctrl"><span onclick="adjustModalFont('quiz',-0.1)" title="缩小字体">A-</span><span onclick="adjustModalFont('quiz',0.1)" title="放大字体">A+</span></div>
+                <div class="quiz-header">
+                    <div class="quiz-title">🎓 诗词闯关</div>
+                    <div class="quiz-score">连对 <span id="quiz-streak">0</span> 题 · 最高 <span id="quiz-best">0</span></div>
+                </div>
+                <div id="quiz-hint" class="quiz-hint">下面这首诗写于哪一年？</div>
+                <div id="quiz-poem-text" class="quiz-poem-text"></div>
+                <div id="quiz-options" class="quiz-options"></div>
+                <div id="quiz-result" class="quiz-result"></div>
+            </div>
+        </div>
+
+        <!-- 金句墙弹窗 -->
+        <div id="quote-wall-modal" onclick="if(event.target===this)closeQuoteWall()">
+            <div class="quote-wall-box">
+                <div class="qw-close" onclick="closeQuoteWall()">✖</div>
+                <div class="mf-ctrl"><span onclick="adjustModalFont('quoteWall',-0.1)" title="缩小字体">A-</span><span onclick="adjustModalFont('quoteWall',0.1)" title="放大字体">A+</span></div>
+                <div class="qw-title">✨ 毛体金句墙</div>
+                <div class="qw-subtitle">点击金句可跳转至原诗</div>
+                <div id="quote-wall-content" class="quote-wall-content"></div>
+            </div>
+        </div>
+
+        <!-- 年代穿越时间线弹窗 -->
+        <div id="timeline-modal" onclick="if(event.target===this)closeTimeline()">
+            <div class="timeline-box">
+                <div class="tl-close" onclick="closeTimeline()">✖</div>
+                <div class="mf-ctrl"><span onclick="adjustModalFont('timeline',-0.1)" title="缩小字体">A-</span><span onclick="adjustModalFont('timeline',0.1)" title="放大字体">A+</span></div>
+                <div class="tl-title">📜 编年史时间线</div>
+                <div class="tl-subtitle">穿越六十六年诗词长河 · 点击条目阅读原诗</div>
+                <div id="timeline-list" class="timeline-list"></div>
+            </div>
+        </div>
+
+        <!-- 足迹统计弹窗 -->
+        <div id="stats-modal" onclick="if(event.target===this)closeStats()">
+            <div class="stats-modal-box">
+                <div class="stats-close" onclick="closeStats()">✖</div>
+                <div class="mf-ctrl"><span onclick="adjustModalFont('stats',-0.1)" title="缩小字体">A-</span><span onclick="adjustModalFont('stats',0.1)" title="放大字体">A+</span></div>
+                <div class="stats-title">📊 阅读足迹</div>
+                <div id="stats-content" class="stats-content"></div>
+            </div>
+        </div>
+
+        <!-- 长征专题弹窗 -->
+        <div id="longmarch-modal" onclick="if(event.target===this)closeLongMarch()">
+            <div class="lm-box">
+                <div class="lm-close" onclick="closeLongMarch()">✖</div>
+                <div class="mf-ctrl"><span onclick="adjustModalFont('longmarch',-0.1)" title="缩小字体">A-</span><span onclick="adjustModalFont('longmarch',0.1)" title="放大字体">A+</span></div>
+                <div class="lm-title">🚩 长征诗词专题</div>
+                <div class="lm-subtitle">十八首长征组诗 · 点击品读</div>
+                <div id="lm-list" class="lm-list"></div>
+            </div>
+        </div>
+
+        <!-- 关于本站弹窗 -->
+        <div id="about-modal" onclick="if(event.target===this)closeAboutModal()">
+            <div class="about-modal-box">
+                <div class="about-modal-close" onclick="closeAboutModal()">✖</div>
+                <div class="about-modal-title">毛主席诗词全景地图</div>
+                <div class="about-modal-tagline">编年史特展 · 动态时空溯游</div>
+                <div class="about-modal-stats">
+                    <div><span class="am-num">65</span><span class="am-lbl">名篇</span></div>
+                    <div><span class="am-num">66</span><span class="am-lbl">载岁月</span></div>
+                    <div><span class="am-num">18</span><span class="am-lbl">长征节点</span></div>
+                </div>
+                <div class="about-modal-section-title">📌 网站内容</div>
+                <div class="about-modal-desc">本站收录毛泽东主席 1910—1976 年间创作的 65 首诗词，涵盖星火燎原、长征抗战、建国岁月三大历史时期。以交互式中国地图为载体，标注每一首诗词的创作地点，配以原文、创作背景、逐句释义与朗读音频，打造一场可漫游的诗词编年史特展。</div>
+                <div class="about-modal-section-title">🎯 建站目的</div>
+                <div class="about-modal-desc">以地理视角重温伟人诗词创作历程，让诗词爱好者与历史学习者能够按图索骥，在地图上直观感受从韶山少年到中南海岁月的思想轨迹，传承红色经典，弘扬诗词文化。</div>
+                <div class="about-modal-section-title">🧭 功能导览</div>
+                <div class="about-modal-modules">
+                    <div class="about-module-item">
+                        <div class="about-module-icon">🗺️</div>
+                        <div class="about-module-text">
+                            <div class="about-module-name">全景地图</div>
+                            <div class="about-module-desc">点击金色标记阅读诗词原文、创作背景、逐句释义，聆听朗读音频</div>
+                        </div>
+                    </div>
+                    <div class="about-module-item">
+                        <div class="about-module-icon">📅</div>
+                        <div class="about-module-text">
+                            <div class="about-module-name">今日一诗</div>
+                            <div class="about-module-desc">每日精选推荐一首诗词，品味经典</div>
+                        </div>
+                    </div>
+                    <div class="about-module-item">
+                        <div class="about-module-icon">🎓</div>
+                        <div class="about-module-text">
+                            <div class="about-module-name">诗词闯关</div>
+                            <div class="about-module-desc">多题型答题（年份/地点/背景），需先阅读至少一首诗方能挑战</div>
+                        </div>
+                    </div>
+                    <div class="about-module-item">
+                        <div class="about-module-icon">✨</div>
+                        <div class="about-module-text">
+                            <div class="about-module-name">金句墙</div>
+                            <div class="about-module-desc">诗词名句精选瀑布流，点击金句跳转原诗</div>
+                        </div>
+                    </div>
+                    <div class="about-module-item">
+                        <div class="about-module-icon">📜</div>
+                        <div class="about-module-text">
+                            <div class="about-module-name">年代穿越</div>
+                            <div class="about-module-desc">编年史竖向时间线，点击条目穿越至对应诗词</div>
+                        </div>
+                    </div>
+                    <div class="about-module-item">
+                        <div class="about-module-icon">📊</div>
+                        <div class="about-module-text">
+                            <div class="about-module-name">足迹统计</div>
+                            <div class="about-module-desc">阅读进度仪表盘，查看已读/收藏/省份足迹与时代进度</div>
+                        </div>
+                    </div>
+                    <div class="about-module-item">
+                        <div class="about-module-icon">🚩</div>
+                        <div class="about-module-text">
+                            <div class="about-module-name">长征专题</div>
+                            <div class="about-module-desc">长征时期十八首组诗巡展，重温峥嵘岁月</div>
+                        </div>
+                    </div>
+                    <div class="about-module-item">
+                        <div class="about-module-icon">📷</div>
+                        <div class="about-module-text">
+                            <div class="about-module-name">诗词卡片</div>
+                            <div class="about-module-desc">阅读时可一键生成带二维码的精美分享卡片</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-modal-tip">💡 拖拽地图浏览 · 点击标记阅读 · 拖动底部时间轴穿越年代 · 左侧按钮探索更多功能</div>
+            </div>
+        </div>
+
+        <div id="poem-modal">
+            <div class="poem-scroll-content">
+                <!-- 视频背景层和高透遮罩层 -->
+                <video id="modal-bg-video" autoplay loop muted playsinline></video>
+                <div class="video-overlay"></div>
+                <!-- 顶部沉浸式音频进度条 -->
+                <div id="audio-progress-container">
+                    <div id="audio-progress-bar"></div>
+                </div>
+
+                <div class="close-modal" onclick="closePoemModal()">✖</div>
+
+                <div class="modal-font-btns">
+                    <div class="font-btn" onclick="changeFontSize(-1)" title="缩小字体">A-</div>
+                    <div class="font-btn" onclick="changeFontSize(1)" title="放大字体">A+</div>
+                    <div class="font-btn" onclick="exportPoemCard()" title="导出诗词卡片" style="width:auto;padding:0 8px;">📷</div>
+                </div>
+                <div class="modal-quote" id="modal-quote-text">星火燎原</div>
+
+                <div class="modal-header-info">
+                    <div class="modal-poem-title" id="modal-poem-title">标题</div>
+                    <div class="modal-poem-meta"><span id="modal-poem-year">年份</span> 年 · <span id="modal-poem-location">地点</span></div>
+                    <div class="modal-actions">
+                        <div id="modal-fav-btn" class="modal-fav-btn" onclick="toggleFavorite()">☆ 收藏</div>
+                        <div id="modal-audio-control" class="modal-audio-btn" onclick="togglePoemAudio()">🔊 暂停朗读</div>
+                        <div class="modal-speed-btn" id="modal-speed-btn" onclick="cycleAudioSpeed()" title="朗读语速">1x</div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="modal-section-title">全诗品鉴</div>
+                        <div class="modal-full-text" id="modal-full-text">加载中...</div>
+                        <div class="annotation-toggle-btn" id="annotation-toggle-btn" onclick="toggleAnnotation()" style="display:none;">📖 展开逐句释义</div>
+                        <div class="modal-annotation" id="modal-annotation" style="display:none;"></div>
+                    </div>
+                    <div>
+                        <div class="modal-section-title">历史创作背景</div>
+                        <div class="modal-background-text" id="modal-background-text">加载中...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 👇 新增：引入 Three.js 引擎库及您的鼠标交互粒子脚本 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="./js/particle.js"></script>
+
+    <!-- 按严格顺序引入业务脚本：数据必须最先加载 -->
+    <script src="./js/data.js"></script>
+    <script src="./js/map.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>

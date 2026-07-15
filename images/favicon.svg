@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a0a0a"/>
+      <stop offset="100%" stop-color="#1a0404"/>
+    </linearGradient>
+    <linearGradient id="star" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE45C"/>
+      <stop offset="100%" stop-color="#D4A017"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 圆角深红底 -->
+  <rect width="64" height="64" rx="14" fill="url(#bg)" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 五角星 -->
+  <polygon points="32,8 38.5,24.5 56,24.5 41.8,35 47.2,52 32,41.5 16.8,52 22.2,35 8,24.5 25.5,24.5"
+           fill="url(#star)" filter="url(#glow)"/>
+  <!-- 底部山峦剪影 -->
+  <path d="M 6 50 L 16 40 L 24 48 L 32 38 L 42 50 L 52 42 L 58 50 L 58 58 L 6 58 Z"
+        fill="#ba2a24" opacity="0.7"/>
+</svg>
