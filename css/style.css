@@ -1275,27 +1275,8 @@ body, html {
 /* ==========================================================================
    13. 移动端 safe-area 安全区与字号优化
    解决：① 浏览器地址栏/系统导航栏遮挡底部 ② 摄像头/刘海遮挡顶部
-        ③ 列表与地图字号过小 ④ dvh 动态视口高度
+        ③ 列表与地图字号过小
    ========================================================================== */
-
-/* 全屏容器改用动态视口高度，随地址栏显示/隐藏自适应 */
-@supports (height: 100dvh) {
-    #entry-screen,
-    #main-content,
-    #map-box,
-    #vignette-overlay,
-    #poem-modal,
-    #quiz-modal,
-    #quote-wall-modal,
-    #timeline-modal,
-    #stats-modal,
-    #longmarch-modal,
-    #about-modal,
-    #poster-share-modal {
-        height: 100dvh !important;
-    }
-    .poem-scroll-content { height: 90dvh !important; max-height: 90dvh !important; }
-}
 
 @media (max-width: 768px) {
     /* === 顶部安全区：避开刘海/摄像头 === */
