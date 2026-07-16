@@ -367,6 +367,18 @@
             const bgm = document.getElementById('bgm');
             const waveOverlay = document.getElementById('intro-wave-overlay');
 
+            // === 移动端快速通道：跳过视频转场，直接进入主地图 ===
+            if (window.innerWidth <= 768) {
+                entry.style.display = 'none';
+                if (videoContainer) videoContainer.style.display = 'none';
+                const mainEl = document.getElementById('main-content');
+                mainEl.classList.add('active');
+                if (bgm) { bgm.volume = 0.4; bgm.play().catch(()=>{}); isPlaying = true; document.getElementById('music-btn').classList.add('playing'); }
+                initSidebar();
+                window.renderChinaMap();
+                return; // 移动端到此结束，不走下面的视频逻辑
+            }
+
             // 1. 入场屏渐隐
             entry.style.opacity = '0';
 
