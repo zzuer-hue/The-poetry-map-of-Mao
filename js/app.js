@@ -376,18 +376,6 @@
 
             // === 移动端快速通道：跳过视频转场，直接进入主地图 ===
             if (window.innerWidth <= 768) {
-                // 移动端删除 @font-face 大字体规则，用系统字体加速首屏
-                try {
-                    for (let i = document.styleSheets.length - 1; i >= 0; i--) {
-                        const sheet = document.styleSheets[i];
-                        const rules = sheet.cssRules || sheet.rules;
-                        if (!rules) continue;
-                        for (let j = rules.length - 1; j >= 0; j--) {
-                            if (rules[j].type === 5) sheet.deleteRule(j); // 5 = FONT_FACE_RULE
-                        }
-                    }
-                } catch(e) {}
-
                 entry.style.display = 'none';
                 if (videoContainer) videoContainer.style.display = 'none';
                 document.body.classList.add('mobile-mode');
@@ -663,10 +651,16 @@
         speedIndex = 1;
         poemAudioPlayer.playbackRate = 1;
         document.getElementById('modal-speed-btn').innerText = '1x';
+        // 渲染前言（如果有）—— 小字、斜体、与正文区分
+        let poemHtml = '';
+        if (itemData.preface) {
+            poemHtml += '<div class="poem-preface">' + itemData.preface + '</div>';
+        }
         const poemLines = itemData.fullText.split('\n');
-        fullTextEl.innerHTML = poemLines.map((line, i) =>
+        poemHtml += poemLines.map((line, i) =>
             '<div class="poem-line" data-line="' + i + '">' + (line || '&nbsp;') + '</div>'
         ).join('');
+        fullTextEl.innerHTML = poemHtml;
         currentLineTimings = []; // 重置时间轴，等音频 metadata 加载后再计算
         useAnalyzedTimings = false; // 重置预分析标记
         lastHighlightLineIdx = -1; // 重置高亮行号
@@ -854,15 +848,19 @@
         const bgUrl = randomBgImage || videoFrameUrl;
             const cardBg = bgUrl ? `url(${bgUrl}) center/cover` : 'radial-gradient(ellipse at center, #2a0808 0%, #0a0202 100%)';
 
-            // 创建卡片容器（高度自适应）
+            // 创建卡片容器（高度自适应，移动端缩小尺寸避免截断）
+            const isMobileCard = window.innerWidth <= 768;
+            const cardWidth = isMobileCard ? 350 : 750;
+            const cardPadding = isMobileCard ? '22px 20px 20px' : '45px 40px 40px';
+            const cardBorder = isMobileCard ? '2px' : '3px';
             const card = document.createElement('div');
             card.style.cssText = `
                 position: fixed; left: -9999px; top: 0;
-                width: 750px;
+                width: ${cardWidth}px;
                 background: ${cardBg};
-                border: 3px solid #FFD700; border-radius: 16px;
+                border: ${cardBorder} solid #FFD700; border-radius: 16px;
                 overflow: hidden;
-                padding: 45px 40px 40px; box-sizing: border-box;
+                padding: ${cardPadding}; box-sizing: border-box;
             `;
 
             // 半透明遮罩层
@@ -890,8 +888,8 @@
             const titleEl = document.createElement('div');
             titleEl.innerText = title;
             titleEl.style.cssText = `
-                text-align: center; font-size: 38px; color: #FFD700; font-weight: bold;
-                text-shadow: 0 2px 12px rgba(0,0,0,0.95); margin-bottom: 8px; letter-spacing: 4px;
+                text-align: center; font-size: ${isMobileCard ? 22 : 38}px; color: #FFD700; font-weight: bold;
+                text-shadow: 0 2px 12px rgba(0,0,0,0.95); margin-bottom: ${isMobileCard ? 4 : 8}px; letter-spacing: ${isMobileCard ? 2 : 4}px;
                 font-family: 'MaoFont', 'STKaiti', 'KaiTi', '楷体', serif;
             `;
             content.appendChild(titleEl);
@@ -900,7 +898,7 @@
             const metaEl = document.createElement('div');
             metaEl.innerText = year + '年 · ' + location;
             metaEl.style.cssText = `
-                text-align: center; font-size: 15px; color: #d4a373; margin-bottom: 18px;
+                text-align: center; font-size: ${isMobileCard ? 12 : 15}px; color: #d4a373; margin-bottom: ${isMobileCard ? 10 : 18}px;
                 text-shadow: 0 1px 6px rgba(0,0,0,0.95);
             `;
             content.appendChild(metaEl);
@@ -908,7 +906,7 @@
             // 金色分隔线
             const divider = document.createElement('div');
             divider.style.cssText = `
-                width: 60px; height: 2px; background: #FFD700; margin: 0 auto 20px;
+                width: ${isMobileCard ? 40 : 60}px; height: 2px; background: #FFD700; margin: 0 auto ${isMobileCard ? 12 : 20}px;
                 box-shadow: 0 0 8px rgba(255,215,0,0.5);
             `;
             content.appendChild(divider);
@@ -917,9 +915,9 @@
             const poemEl = document.createElement('div');
             poemEl.innerText = poem;
             poemEl.style.cssText = `
-                font-size: 21px; color: #ffffff; text-align: center;
-                line-height: 2.0; letter-spacing: 3px; white-space: pre-wrap;
-                text-shadow: 0 2px 8px rgba(0,0,0,0.95); margin-bottom: 24px;
+                font-size: ${isMobileCard ? 14 : 21}px; color: #ffffff; text-align: center;
+                line-height: ${isMobileCard ? 1.8 : 2.0}; letter-spacing: ${isMobileCard ? 1 : 3}px; white-space: pre-wrap;
+                text-shadow: 0 2px 8px rgba(0,0,0,0.95); margin-bottom: ${isMobileCard ? 14 : 24}px;
                 font-family: 'STKaiti', 'KaiTi', '楷体', serif;
             `;
             content.appendChild(poemEl);
@@ -929,8 +927,8 @@
                 const bgTitleEl = document.createElement('div');
                 bgTitleEl.innerText = '创作背景';
                 bgTitleEl.style.cssText = `
-                    text-align: center; font-size: 15px; color: #FFD700; font-weight: bold;
-                    margin-bottom: 10px; letter-spacing: 2px;
+                    text-align: center; font-size: ${isMobileCard ? 12 : 15}px; color: #FFD700; font-weight: bold;
+                    margin-bottom: ${isMobileCard ? 6 : 10}px; letter-spacing: 2px;
                 `;
                 content.appendChild(bgTitleEl);
 
@@ -939,10 +937,10 @@
                 const bgDisplay = bgText.length > 500 ? bgText.substring(0, 500) + '……' : bgText;
                 bgEl.innerText = bgDisplay;
                 bgEl.style.cssText = `
-                    font-size: 14px; color: #e0e0e0; line-height: 1.9; letter-spacing: 1px;
+                    font-size: ${isMobileCard ? 11 : 14}px; color: #e0e0e0; line-height: ${isMobileCard ? 1.7 : 1.9}; letter-spacing: 1px;
                     text-indent: 2em; text-shadow: 0 1px 6px rgba(0,0,0,0.95);
-                    background: rgba(0,0,0,0.35); border-left: 3px solid #FFD700;
-                    padding: 16px 18px; border-radius: 0 8px 8px 0;
+                    background: rgba(0,0,0,0.35); border-left: ${isMobileCard ? 2 : 3}px solid #FFD700;
+                    padding: ${isMobileCard ? '10px 12px' : '16px 18px'}; border-radius: 0 8px 8px 0;
                     font-family: 'Microsoft YaHei', sans-serif;
                 `;
                 content.appendChild(bgEl);
@@ -953,23 +951,24 @@
             // 底部水印 + 二维码（绝对定位右下角，不单独占行）
             const footer = document.createElement('div');
             footer.style.cssText = `
-                position: absolute; bottom: 15px; right: 18px; z-index: 2;
-                display: flex; align-items: center; gap: 8px;
+                position: absolute; bottom: ${isMobileCard ? 10 : 15}px; right: ${isMobileCard ? 12 : 18}px; z-index: 2;
+                display: flex; align-items: center; gap: ${isMobileCard ? 6 : 8}px;
             `;
             // 左侧文字
             const footerText = document.createElement('div');
             footerText.style.cssText = `text-align: right;`;
             footerText.innerHTML = `
-                <div style="font-size: 13px; color: #FFD700; font-weight: bold; letter-spacing: 1px; font-family: 'STKaiti', '楷体', serif;">毛主席诗词全景地图</div>
-                <div style="font-size: 10px; color: rgba(212,163,115,0.85); margin-top: 2px; letter-spacing: 1px;">📱 扫码体验</div>
+                <div style="font-size: ${isMobileCard ? 10 : 13}px; color: #FFD700; font-weight: bold; letter-spacing: 1px; font-family: 'STKaiti', '楷体', serif;">毛主席诗词全景地图</div>
+                <div style="font-size: ${isMobileCard ? 8 : 10}px; color: rgba(212,163,115,0.85); margin-top: 2px; letter-spacing: 1px;">📱 扫码体验</div>
             `;
             footer.appendChild(footerText);
             // 右侧二维码
             const qrImg = document.createElement('img');
-            const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=120x120&margin=2&data=' + encodeURIComponent(window.location.href);
+            const qrSize = isMobileCard ? 80 : 120;
+            const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=' + qrSize + 'x' + qrSize + '&margin=2&data=' + encodeURIComponent(window.location.href);
             qrImg.crossOrigin = 'anonymous';
             qrImg.src = qrUrl;
-            qrImg.style.cssText = `width: 60px; height: 60px; border: 2px solid rgba(255,215,0,0.5); border-radius: 6px; background: #fff; padding: 2px;`;
+            qrImg.style.cssText = `width: ${isMobileCard ? 40 : 60}px; height: ${isMobileCard ? 40 : 60}px; border: 2px solid rgba(255,215,0,0.5); border-radius: 6px; background: #fff; padding: 2px;`;
             footer.appendChild(qrImg);
             card.appendChild(footer);
 

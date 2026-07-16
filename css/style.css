@@ -6,14 +6,17 @@
 @font-face {
     font-family: 'MaoFont';
     src: url('../maoti.ttf') format('truetype');
+    font-display: swap;
 }
 @font-face {
     font-family: 'PoemKai';
     src: url('../poemkai.ttf') format('truetype');
+    font-display: swap;
 }
 @font-face {
     font-family: 'NormFont';
     src: url('../norm.ttf') format('truetype');
+    font-display: swap;
 }
 
 body, html {
@@ -317,6 +320,22 @@ body, html {
     letter-spacing: 4px;     /* 字间距适中 */
     text-align: center; white-space: pre-wrap; color: #ffffff;
     text-shadow: 0 2px 8px rgba(0,0,0,0.85); /* 强化文字边缘，防吃色 */
+}
+
+/* 诗词前言（小序）：小字、斜体、与正文区分 */
+.poem-preface {
+    font-family: 'STKaiti', 'KaiTi', '楷体', serif;
+    font-size: 16px;
+    line-height: 1.7;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #d4a373;
+    font-style: italic;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed rgba(212, 163, 115, 0.35);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+    white-space: pre-wrap;
 }
 
 /* 创作背景文字 */

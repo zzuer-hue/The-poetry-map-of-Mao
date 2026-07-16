@@ -41,14 +41,13 @@ body.mobile-mode #about-btn,
 body.mobile-mode #overview-btn {
     display: block !important;
     position: absolute;
-    left: 10px;
     padding: 5px 9px !important;
     font-size: 10px !important;
     letter-spacing: 1px !important;
     z-index: 101;
 }
-body.mobile-mode #about-btn { top: calc(10px + env(safe-area-inset-top)); }
-body.mobile-mode #overview-btn { top: calc(40px + env(safe-area-inset-top)); }
+body.mobile-mode #about-btn { left: 10px; top: calc(10px + env(safe-area-inset-top)); }
+body.mobile-mode #overview-btn { right: 10px; top: calc(10px + env(safe-area-inset-top)); }
 body.mobile-mode #today-btn,
 body.mobile-mode #quiz-btn,
 body.mobile-mode #quote-wall-btn,
@@ -206,6 +205,17 @@ body.mobile-mode .modal-body {
 body.mobile-mode .modal-section-title { font-size: 15px; margin-bottom: 6px; }
 body.mobile-mode .modal-section-title::before { font-size: 10px; margin-right: 6px; }
 body.mobile-mode .modal-full-text { font-size: 16px; line-height: 1.9; letter-spacing: 2px; }
+body.mobile-mode .poem-preface {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    letter-spacing: 1px !important;
+    color: #d4a373 !important;
+    margin-bottom: 12px !important;
+    padding-bottom: 10px !important;
+    border-bottom: 1px dashed rgba(212, 163, 115, 0.35) !important;
+    font-style: italic !important;
+    text-align: center !important;
+}
 body.mobile-mode .modal-background-text { font-size: 14px; line-height: 2; padding: 10px; letter-spacing: 0.5px; }
 body.mobile-mode .modal-quote { display: none !important; }
 body.mobile-mode .close-modal { top: 6px; right: 6px; width: 28px; height: 28px; font-size: 12px; }
