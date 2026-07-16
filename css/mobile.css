@@ -5,7 +5,7 @@
 
 @media (max-width: 768px) {
     /* ========================================================
-       0. 移动端系统字体替代（@font-face 已被 JS 删除，这里指定系统楷体）
+       0. 移动端系统字体替代（@font-face 已被 JS 删除）
        ======================================================== */
     body, html, #title, #subtitle, .modal-poem-title, .modal-full-text,
     .modal-background-text, .modal-section-title, .modal-poem-meta,
@@ -16,106 +16,127 @@
     }
 
     /* ========================================================
-       1. 右侧列表默认收起，地图全屏显示
+       1. 右侧导航栏改为底部横向滚动条，地图全屏居中
        ======================================================== */
-    #main-content { overflow: hidden; }
     #sidebar {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
         width: 100% !important;
         max-width: 100% !important;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        z-index: 1100;
-        box-shadow: -4px 0 20px rgba(0,0,0,0.5);
+        height: 130px !important;
+        max-height: 130px !important;
+        transform: none !important;
+        z-index: 1000;
+        display: flex !important;
+        flex-direction: column;
+        background: rgba(20,5,5,0.92);
+        border-top: 1px solid rgba(255,215,0,0.3);
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
     }
-    #sidebar.open { transform: translateX(0); }
+    /* 隐藏 header 统计/标签/搜索（底部条只显示诗词列表） */
+    .sidebar-header { display: none !important; }
+    /* school-list 横向滚动 */
+    #school-list {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        padding: 8px 10px !important;
+        gap: 8px !important;
+        flex: 1;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+    #school-list::-webkit-scrollbar { height: 4px; }
+    #school-list::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.4); border-radius: 2px; }
+    /* school-card 横向卡片 */
+    .school-card {
+        flex: 0 0 auto !important;
+        width: 150px !important;
+        min-width: 150px !important;
+        margin-bottom: 0 !important;
+        padding: 8px 10px !important;
+    }
+    .card-school-name { font-size: 14px !important; }
+    .card-province { font-size: 10px !important; padding: 2px 6px !important; }
+    .card-students { font-size: 11px !important; line-height: 1.5 !important; }
+    .card-year-badge { font-size: 18px !important; }
 
-    /* "☰ 展开全集"按钮：作为地图/列表切换入口 */
-    #mobile-toggle {
-        display: block !important;
-        position: absolute;
-        right: 16px;
-        top: calc(12px + env(safe-area-inset-top));
-        background: rgba(255,215,0,0.2);
-        color: #FFD700;
-        border: 1px solid #FFD700;
-        padding: 8px 14px;
-        border-radius: 30px;
-        font-weight: bold;
-        font-size: 12px;
-        z-index: 1001;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
+    /* 隐藏"展开全集"按钮（底部条始终可见，不需要切换） */
+    #mobile-toggle { display: none !important; }
 
     /* ========================================================
-       2. 顶部标题区 + 底部时间轴移到标题下方
+       2. 顶部标题区 + 时间轴移到标题下方
        ======================================================== */
     #title-container {
         width: 100%;
-        top: calc(10px + env(safe-area-inset-top));
+        top: calc(8px + env(safe-area-inset-top));
         left: 50%;
-        padding: 0 120px;
+        padding: 0 110px;
         box-sizing: border-box;
         text-align: center;
     }
-    #title { font-size: 15px; letter-spacing: 1px; white-space: normal; }
+    #title { font-size: 14px; letter-spacing: 1px; white-space: normal; }
     #subtitle { font-size: 9px; letter-spacing: 1px; margin-top: 2px; }
 
     /* 底部时间轴移到标题正下方 */
     #timeline-container {
         position: absolute;
         left: 50%;
-        top: calc(58px + env(safe-area-inset-top));
+        top: calc(52px + env(safe-area-inset-top));
         bottom: auto !important;
         width: 92%;
-        padding: 0 12px;
-        height: 32px;
+        padding: 0 10px;
+        height: 30px;
         transform: translateX(-50%);
     }
     #timeline-current-year {
-        font-size: 13px;
-        padding: 3px 10px;
-        top: -32px;
+        font-size: 12px;
+        padding: 2px 8px;
+        top: -28px;
         letter-spacing: 1px;
     }
-    #timeline-current-year::after { bottom: -10px; height: 10px; }
-    .timeline-label { font-size: 11px; }
-    #timeline-play-btn { width: 26px; height: 26px; font-size: 12px; }
-    #time-slider::-webkit-slider-thumb { width: 16px; height: 16px; }
+    #timeline-current-year::after { bottom: -8px; height: 8px; }
+    .timeline-label { font-size: 10px; }
+    #timeline-play-btn { width: 24px; height: 24px; font-size: 11px; }
+    #time-slider::-webkit-slider-thumb { width: 14px; height: 14px; }
 
     /* ========================================================
-       3. 左侧只保留 2 个按钮（关于本站 + 随机品鉴），其余隐藏
+       3. 左侧只保留 2 个按钮，其余隐藏
        ======================================================== */
     #about-btn, #overview-btn {
-        padding: 6px 10px;
-        font-size: 11px;
+        padding: 5px 9px;
+        font-size: 10px;
         letter-spacing: 1px;
-        top: calc(12px + env(safe-area-inset-top));
+        top: calc(10px + env(safe-area-inset-top));
     }
-    #about-btn { left: 12px; }
-    #overview-btn { left: 12px; top: calc(44px + env(safe-area-inset-top)); }
-    /* 隐藏其余 6 个功能按钮，释放左侧空间 */
+    #about-btn { left: 10px; }
+    #overview-btn { left: 10px; top: calc(40px + env(safe-area-inset-top)); }
     #today-btn, #quiz-btn, #quote-wall-btn,
     #timeline-btn, #stats-btn, #longmarch-btn {
         display: none !important;
     }
 
     /* ========================================================
-       4. 截屏/音乐按钮重新定位，避免与时间轴重叠
+       4. 截屏/音乐按钮定位（底部列表上方）
        ======================================================== */
     #snapshot-btn, #music-btn {
-        width: 36px; height: 36px;
+        width: 34px; height: 34px;
         position: absolute;
-        bottom: calc(16px + env(safe-area-inset-bottom));
+        bottom: 138px;
     }
-    #music-btn { left: 16px; }
-    #snapshot-btn { left: 60px; }
+    #music-btn { left: 12px; }
+    #snapshot-btn { left: 54px; }
 
-    /* 地图控制按钮移到右下角 */
+    /* 地图控制按钮移到右下角（底部列表上方）*/
     #map-controls {
-        right: 16px;
-        bottom: calc(16px + env(safe-area-inset-bottom));
+        right: 12px;
+        bottom: 138px;
     }
-    .control-btn { width: 36px; height: 36px; font-size: 16px; }
+    .control-btn { width: 34px; height: 34px; font-size: 15px; }
 
     /* ========================================================
        5. 诗词鉴赏弹窗：全屏可滚动式
@@ -211,21 +232,6 @@
     .stats-bar-label { font-size: 12px !important; }
     .stats-province-tag { font-size: 12px !important; padding: 3px 10px; }
 
-    /* ========================================================
-       7. 侧边栏列表字号增大
-       ======================================================== */
-    .sidebar-header { padding: 14px 14px 8px; }
-    .sidebar-title { font-size: 17px; }
-    .stat-num { font-size: 24px; }
-    .stat-label { font-size: 12px; margin-top: 4px; }
-    .stats-box { margin-top: 10px; }
-    .school-card { padding: 12px 14px; margin-bottom: 10px; }
-    .card-school-name { font-size: 17px; }
-    .card-province { font-size: 12px; padding: 3px 8px; }
-    .card-students { font-size: 13px; line-height: 1.7; }
-    .card-year-badge { font-size: 22px; }
-    .progress-text { font-size: 13px; }
-
     /* 海报分享面板 */
     .poster-share-box { padding: 14px; gap: 10px; }
     .poster-share-title { font-size: 15px; letter-spacing: 1px; }
@@ -234,11 +240,13 @@
 
 /* === 超小屏幕进一步压缩 === */
 @media (max-width: 380px) {
-    #title { font-size: 13px; letter-spacing: 1px; }
-    #title-container { padding: 0 110px; }
+    #title { font-size: 12px; letter-spacing: 1px; }
+    #title-container { padding: 0 100px; }
     .modal-poem-title { font-size: 20px; }
     .modal-full-text { font-size: 14px; letter-spacing: 1px; }
     #about-btn, #overview-btn { padding: 4px 8px; font-size: 10px; }
     .poem-scroll-content { padding: 8px 8px 12px 8px; }
     .modal-body { padding: 10px 8px; }
+    .school-card { width: 130px !important; min-width: 130px !important; }
+    #sidebar { height: 120px !important; max-height: 120px !important; }
 }

@@ -284,7 +284,14 @@
             let activeCard = document.getElementById(currentItem._uniqueId);
             if(activeCard) {
                 activeCard.classList.add('active');
-                if (updateFocus) activeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (updateFocus) {
+                    // 移动端底部横向列表：水平居中滚动；桌面端：垂直居中滚动
+                    if (window.innerWidth <= 768) {
+                        activeCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    } else {
+                        activeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
             }
         }
         function initTimeline() {
