@@ -26,3 +26,18 @@ node_modules/
 # 临时验证/修复脚本
 verify*.js
 fix-html.js
+_srv.js
+_test_server.js
+
+# 本地环境
+.env
+.env.local
+
+# 构建产物
+/dist/
+/build/
+
+# 包管理
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

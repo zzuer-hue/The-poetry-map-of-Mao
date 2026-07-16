@@ -50,9 +50,14 @@
     <script src="https://cdn.staticfile.net/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.staticfile.net/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
 
+    <!-- 预加载核心字体，优先渲染毛体标题 -->
+    <link rel="preload" href="./maoti.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="./poemkai.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="./norm.ttf" as="font" type="font/ttf" crossorigin>
+
     <!-- 引入拆分后的 CSS -->
-    <link rel="stylesheet" href="./css/style.css?v=20260716e">
-    <link rel="stylesheet" href="./css/mobile.css?v=20260716e" media="only screen and (max-width: 768px)">
+    <link rel="stylesheet" href="./css/style.css?v=20260716f">
+    <link rel="stylesheet" href="./css/mobile.css?v=20260716f" media="only screen and (max-width: 768px)">
 
     <!-- ==================== 结构化数据 (Schema.org) ==================== -->
     <script type="application/ld+json">
@@ -104,7 +109,7 @@
             <div id="subtitle">收录名篇 <span id="total-distance" class="highlight-km">60</span> 余首，见证中国革命史</div>
         </div>
         
-        <div id="overview-btn" class="snapshot-hide" onclick="randomPoem()" title="随机抽取一首伟人名篇" aria-label="随机品鉴"><span>🎲</span></div>
+        <div id="overview-btn" class="snapshot-hide" onclick="randomPoem()" title="随机抽取一首伟人名篇">🎲 随机品鉴</div>
         <div id="today-btn" class="snapshot-hide" onclick="openTodayPoem()" title="每日推荐一首诗词">📅 今日一诗</div>
         <div id="quiz-btn" class="snapshot-hide" onclick="openQuiz()" title="诗词闯关答题">🎓 诗词闯关</div>
         <div id="quote-wall-btn" class="snapshot-hide" onclick="openQuoteWall()" title="毛体金句墙">✨ 金句墙</div>
@@ -263,6 +268,9 @@
                 <div class="about-modal-close" onclick="closeAboutModal()">✖</div>
                 <div class="about-modal-title">毛主席诗词全景地图</div>
                 <div class="about-modal-tagline">编年史特展 · 动态时空溯游</div>
+                <div class="about-mobile-notice">
+                    📱 提示：当前为移动端适配版本，部分功能（诗词闯关、金句墙、年代穿越、足迹统计、长征专题等）已精简，以保障小屏流畅体验。如需欣赏完整交互与最佳视觉效果，建议用电脑端访问。
+                </div>
                 <div class="about-modal-stats">
                     <div><span class="am-num">65</span><span class="am-lbl">名篇</span></div>
                     <div><span class="am-num">66</span><span class="am-lbl">载岁月</span></div>
@@ -381,11 +389,11 @@
     
     <!-- 👇 新增：引入 Three.js 引擎库及您的鼠标交互粒子脚本 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="./js/particle.js?v=20260716e"></script>
+    <script src="./js/particle.js?v=20260716f"></script>
 
     <!-- 按严格顺序引入业务脚本：数据必须最先加载 -->
-    <script src="./js/data.js?v=20260716e"></script>
-    <script src="./js/map.js?v=20260716e"></script>
-    <script src="./js/app.js?v=20260716e"></script>
+    <script src="./js/data.js?v=20260716f"></script>
+    <script src="./js/map.js?v=20260716f"></script>
+    <script src="./js/app.js?v=20260716f"></script>
 </body>
 </html>

@@ -39,33 +39,21 @@ body.mobile-mode #subtitle {
 /* 左侧按钮：只保留关于本站和随机品鉴 */
 body.mobile-mode #about-btn,
 body.mobile-mode #overview-btn {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     position: absolute;
-    z-index: 101;
-}
-body.mobile-mode #about-btn {
-    left: 10px;
     top: calc(10px + env(safe-area-inset-top));
     padding: 5px 9px !important;
     font-size: 10px !important;
+    font-weight: bold !important;
     letter-spacing: 1px !important;
     border-radius: 6px !important;
-}
-body.mobile-mode #overview-btn {
-    right: 10px;
-    top: calc(10px + env(safe-area-inset-top));
-    width: 34px !important;
-    height: 34px !important;
-    font-size: 18px !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
     background: rgba(212, 163, 115, 0.15) !important;
     border: 1px solid rgba(212, 163, 115, 0.4) !important;
+    color: #d4a373 !important;
     backdrop-filter: blur(8px);
+    z-index: 101;
 }
-body.mobile-mode #overview-btn span { pointer-events: none; }
+body.mobile-mode #about-btn { left: 10px; }
+body.mobile-mode #overview-btn { right: 10px; }
 body.mobile-mode #today-btn,
 body.mobile-mode #quiz-btn,
 body.mobile-mode #quote-wall-btn,
@@ -236,6 +224,18 @@ body.mobile-mode .poem-preface {
 }
 body.mobile-mode .modal-background-text { font-size: 14px; line-height: 2; padding: 10px; letter-spacing: 0.5px; }
 body.mobile-mode .modal-quote { display: none !important; }
+body.mobile-mode .about-mobile-notice {
+    display: block !important;
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin: 0 4px 14px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #e6d5c3;
+    text-align: left;
+}
 body.mobile-mode .close-modal { top: 6px; right: 6px; width: 28px; height: 28px; font-size: 12px; }
 body.mobile-mode .modal-font-btns { top: 6px; left: 6px; gap: 4px; }
 body.mobile-mode .font-btn { width: 28px; height: 28px; font-size: 11px; }

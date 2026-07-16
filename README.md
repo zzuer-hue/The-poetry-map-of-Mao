@@ -17,11 +17,14 @@
 
 ```
 诗词路线图6.0/
-├── index.html          # 主页面入口
+├── index.html          # 主页面入口（桌面端完整版 + 移动端自动适配）
+├── mobile.html         # （可选）移动端极简入口
 ├── maoti.ttf           # 毛体字库（标题装饰）
 ├── poemkai.ttf         # 楷体字库（诗词原文）
+├── norm.ttf            # 正文字库
 ├── css/
-│   └── style.css       # 全部样式
+│   ├── style.css       # 桌面端完整样式
+│   └── mobile.css      # 移动端专属样式（≤768px 加载）
 ├── js/
 │   ├── data.js         # 诗词数据（标题/年份/地点/原文/背景/音频路径）
 │   ├── map.js          # ECharts 地图初始化与交互
@@ -30,7 +33,7 @@
 ├── audio/              # 朗读音频（MP3 128kbps）
 ├── video/              # 先导转场视频 + 弹窗背景视频
 ├── images/
-│   ├── card-bg/        # 卡片背景图（50 张，JPG 压缩）
+│   ├── card-bg/        # 卡片背景图（JPG 压缩）
 │   ├── og-share.jpg    # 社交分享预览图
 │   └── favicon.svg     # 站点图标
 ├── lib/
@@ -38,6 +41,13 @@
 └── data/
     └── china.json      # 中国地图 GeoJSON 本地兜底
 ```
+
+## 多端适配说明
+
+- **桌面端**：完整交互版，包含诗词闯关、金句墙、年代穿越、足迹统计、长征专题等全部功能。
+- **移动端**：自动加载 `mobile.css` 进行适配，保留核心地图浏览、诗词赏析、时间轴巡游与随机品鉴功能，部分复杂模块已精简以保障小屏流畅体验。
+- 样式隔离原则：`style.css` 与 `mobile.css` 独立加载，修改移动端样式不会影响桌面端。
+
 
 ## 本地预览
 
@@ -52,21 +62,6 @@ python -m http.server 5500
 ```
 
 浏览器打开 http://127.0.0.1:5500/
-
-## 部署到 GitHub Pages
-
-1. 在 GitHub 创建 **Public** 仓库（如 `poetry-map`）
-2. 初始化并推送代码：
-   ```powershell
-   git init
-   git add -A
-   git commit -m "毛主席诗词全景地图编年史特展"
-   git branch -M main
-   git remote add origin https://github.com/你的用户名/poetry-map.git
-   git push -u origin main
-   ```
-3. 仓库 **Settings → Pages → Branch** 选 `main` → Save
-4. 等待 1-2 分钟，访问 `https://你的用户名.github.io/poetry-map/`
 
 ## 技术栈
 
