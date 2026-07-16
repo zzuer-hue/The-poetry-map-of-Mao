@@ -1377,6 +1377,22 @@
         }
 
         // ==================== 关于本站弹窗 ====================
+        // ==================== 全站访客计数（CounterAPI） ====================
+        (function() {
+            const countEl = document.getElementById('visitor-count');
+            if (!countEl) return;
+            fetch('https://api.counterapi.dev/v1/mao-poetry-map/visits/up')
+                .then(r => r.json())
+                .then(data => {
+                    if (data && data.count !== undefined) {
+                        countEl.innerText = data.count.toLocaleString();
+                    } else {
+                        countEl.innerText = '欢迎';
+                    }
+                })
+                .catch(() => { countEl.innerText = '欢迎'; });
+        })();
+
         window.openAboutModal = function() {
             document.getElementById('about-modal').classList.add('active');
         };
