@@ -399,7 +399,16 @@
 
                 // 显示移动端加载提示
                 const loadingEl = document.getElementById('mobile-loading');
+                const loadingTextEl = document.getElementById('mobile-loading-text');
                 if (loadingEl) loadingEl.style.display = 'flex';
+
+                // 加载等待时循环切换提示语，避免用户以为卡死
+                const loadingMsgs = ['正在读取配置文件…', '正在构建诗词地图…', '正在加载字体与音频…', '资源较大，请耐心等待…'];
+                let msgIdx = 0;
+                const msgTimer = loadingTextEl ? setInterval(() => {
+                    msgIdx = (msgIdx + 1) % loadingMsgs.length;
+                    loadingTextEl.textContent = loadingMsgs[msgIdx];
+                }, 800) : null;
 
                 const mainEl = document.getElementById('main-content');
                 mainEl.classList.add('active');
@@ -409,6 +418,7 @@
 
                 // 主资源就绪后淡出加载提示
                 setTimeout(() => {
+                    if (msgTimer) clearInterval(msgTimer);
                     if (loadingEl) {
                         loadingEl.classList.add('hidden');
                         setTimeout(() => { loadingEl.style.display = 'none'; }, 500);
@@ -1215,7 +1225,7 @@
             if(tourTimer) clearTimeout(tourTimer); 
             tourTimer = null; 
             const tlBtn = document.getElementById('timeline-play-btn');
-            tlBtn.innerText = '▶'; tlBtn.classList.remove('playing'); 
+            tlBtn.classList.remove('playing');
             poemAudioPlayer.pause(); bgm.volume = 1.0;
             document.querySelectorAll('.school-card').forEach(el => el.classList.remove('playing-audio'));
             

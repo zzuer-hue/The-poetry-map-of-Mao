@@ -86,7 +86,7 @@ body.mobile-mode #subtitle {
     font-family: 'STKaiti', 'KaiTi', '楷体', serif !important;
 }
 
-/* 左侧按钮：只保留关于本站和随机品鉴 */
+/* 左侧按钮：只保留关于本站和随机品鉴，以主标题为中心左右对称 */
 body.mobile-mode #about-btn,
 body.mobile-mode #overview-btn {
     position: absolute;
@@ -101,9 +101,13 @@ body.mobile-mode #overview-btn {
     color: #d4a373 !important;
     backdrop-filter: blur(8px);
     z-index: 101;
+    /* 关键：清除桌面端的定位，避免 left/right 同时生效导致按钮被拉伸 */
+    left: auto !important;
+    right: auto !important;
+    width: auto !important;
 }
-body.mobile-mode #about-btn { left: 10px; }
-body.mobile-mode #overview-btn { right: 10px; }
+body.mobile-mode #about-btn { left: 10px !important; }
+body.mobile-mode #overview-btn { right: 10px !important; }
 body.mobile-mode #today-btn,
 body.mobile-mode #quiz-btn,
 body.mobile-mode #quote-wall-btn,

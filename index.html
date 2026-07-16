@@ -56,8 +56,8 @@
     <link rel="preload" href="./norm.ttf" as="font" type="font/ttf" crossorigin>
 
     <!-- 引入拆分后的 CSS -->
-    <link rel="stylesheet" href="./css/style.css?v=20260716j">
-    <link rel="stylesheet" href="./css/mobile.css?v=20260716j" media="only screen and (max-width: 768px)">
+    <link rel="stylesheet" href="./css/style.css?v=20260716m">
+    <link rel="stylesheet" href="./css/mobile.css?v=20260716m" media="only screen and (max-width: 768px)">
 
     <!-- ==================== 结构化数据 (Schema.org) ==================== -->
     <script type="application/ld+json">
@@ -102,7 +102,7 @@
         <div class="mobile-loading-inner">
             <div class="mobile-loading-spinner"></div>
             <div class="mobile-loading-title">正在加载诗词长河</div>
-            <div class="mobile-loading-text">配置文件与地图资源较大，请耐心等待…</div>
+            <div class="mobile-loading-text" id="mobile-loading-text">正在读取配置文件…</div>
         </div>
     </div>
 
@@ -398,11 +398,11 @@
     
     <!-- 👇 新增：引入 Three.js 引擎库及您的鼠标交互粒子脚本 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="./js/particle.js?v=20260716j"></script>
+    <script src="./js/particle.js?v=20260716m"></script>
 
     <!-- 按严格顺序引入业务脚本：数据必须最先加载 -->
-    <script src="./js/data.js?v=20260716j"></script>
-    <script src="./js/map.js?v=20260716j"></script>
-    <script src="./js/app.js?v=20260716j"></script>
+    <script src="./js/data.js?v=20260716m"></script>
+    <script src="./js/map.js?v=20260716m"></script>
+    <script src="./js/app.js?v=20260716m"></script>
 </body>
 </html>
