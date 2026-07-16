@@ -424,7 +424,7 @@ body, html {
         /* 1. 居中动态时间轴面板：毛玻璃边缘 + 发光效果 */
         #timeline-container {
             position: absolute; bottom: 35px; left: calc(50% - 190px); transform: translateX(-50%);
-            width: 50%; max-width: 750px; height: 44px; z-index: 998;
+            width: 50%; max-width: 800px; height: 54px; z-index: 998;
             display: flex; align-items: center; gap: 20px; 
             
             background: rgba(20, 5, 5, 0.35); 
@@ -441,23 +441,27 @@ body, html {
 
         /* 👇 修复丢失的样式：恢复播放按钮的悬浮发光质感 */
         #timeline-play-btn {
-            color: rgba(212, 163, 115, 0.8); font-size: 20px; line-height: 1; cursor: pointer; 
-            width: 36px; height: 36px; flex-shrink: 0;
+            color: #FFD700; font-size: 28px; line-height: 1; cursor: pointer; 
+            width: 48px; height: 48px; flex-shrink: 0;
             display: flex; justify-content: center; align-items: center;
             border-radius: 50%; 
-            border: 1px solid rgba(212, 163, 115, 0.35); 
-            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%); 
+            border: 2px solid rgba(255, 215, 0, 0.6); 
+            background: radial-gradient(circle, rgba(255,215,0,0.18) 0%, transparent 70%); 
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding-left: 3px; overflow: visible;
+            padding-left: 4px; overflow: visible;
+            text-shadow: 0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,215,0,0.4);
+            box-shadow: 0 0 12px rgba(255,215,0,0.25), inset 0 0 10px rgba(255,215,0,0.08);
         }
         #timeline-play-btn:hover { 
-            color: #FFD700; 
-            background: radial-gradient(circle, rgba(255,215,0,0.25) 0%, transparent 80%);
-            transform: scale(1.15); 
+            color: #fff; 
+            background: radial-gradient(circle, rgba(255,215,0,0.35) 0%, transparent 80%);
+            transform: scale(1.12); 
+            box-shadow: 0 0 20px rgba(255,215,0,0.45), inset 0 0 15px rgba(255,215,0,0.15);
         }
         #timeline-play-btn.playing { 
-            color: #FFD700; 
-            text-shadow: 0 0 12px rgba(255,215,0,0.9); 
+            color: #fff; 
+            text-shadow: 0 0 14px rgba(255,215,0,1), 0 0 28px rgba(255,215,0,0.6);
+            box-shadow: 0 0 18px rgba(255,215,0,0.5), inset 0 0 12px rgba(255,215,0,0.2);
         }
         
         /* 👇 修复丢失的样式：恢复两侧静态年份的颜色 */

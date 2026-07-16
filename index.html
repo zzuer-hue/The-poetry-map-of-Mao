@@ -56,8 +56,8 @@
     <link rel="preload" href="./norm.ttf" as="font" type="font/ttf" crossorigin>
 
     <!-- 引入拆分后的 CSS -->
-    <link rel="stylesheet" href="./css/style.css?v=20260716i">
-    <link rel="stylesheet" href="./css/mobile.css?v=20260716i" media="only screen and (max-width: 768px)">
+    <link rel="stylesheet" href="./css/style.css?v=20260716j">
+    <link rel="stylesheet" href="./css/mobile.css?v=20260716j" media="only screen and (max-width: 768px)">
 
     <!-- ==================== 结构化数据 (Schema.org) ==================== -->
     <script type="application/ld+json">
@@ -95,6 +95,15 @@
         <button id="skip-video-btn" style="position: absolute; top: 30px; right: 40px; padding: 6px 16px; background: rgba(0,0,0,0.5); color: #d4a373; border: 1px solid rgba(212,163,115,0.4); border-radius: 20px; cursor: pointer; z-index: 9001; font-family: '楷体', serif; font-size: 16px; backdrop-filter: blur(4px); transition: all 0.3s;">
             跳过动画 ⏭
         </button>
+    </div>
+
+    <!-- 移动端加载提示 -->
+    <div id="mobile-loading" style="display:none;">
+        <div class="mobile-loading-inner">
+            <div class="mobile-loading-spinner"></div>
+            <div class="mobile-loading-title">正在加载诗词长河</div>
+            <div class="mobile-loading-text">配置文件与地图资源较大，请耐心等待…</div>
+        </div>
     </div>
 
     <div id="main-content">
@@ -267,10 +276,10 @@
             <div class="about-modal-box">
                 <div class="about-modal-close" onclick="closeAboutModal()">✖</div>
                 <div class="about-modal-title">毛主席诗词全景地图</div>
-                <div class="about-modal-tagline">编年史特展 · 动态时空溯游</div>
                 <div class="about-mobile-notice">
-                    📱 提示：当前为移动端适配版本，部分功能（诗词闯关、金句墙、年代穿越、足迹统计、长征专题等）已精简，以保障小屏流畅体验。如需欣赏完整交互与最佳视觉效果，建议用电脑端访问。
+                    📱 移动端适配提示：当前为小屏适配版本，仅保留核心地图浏览、诗词赏析、时间轴巡游与随机品鉴功能，诗词闯关、金句墙、年代穿越、足迹统计、长征专题等模块已精简。如需体验完整交互与最佳视觉效果，建议用电脑端访问本站。
                 </div>
+                <div class="about-modal-tagline">编年史特展 · 动态时空溯游</div>
                 <div class="about-modal-stats">
                     <div><span class="am-num">65</span><span class="am-lbl">名篇</span></div>
                     <div><span class="am-num">66</span><span class="am-lbl">载岁月</span></div>
@@ -389,11 +398,11 @@
     
     <!-- 👇 新增：引入 Three.js 引擎库及您的鼠标交互粒子脚本 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="./js/particle.js?v=20260716i"></script>
+    <script src="./js/particle.js?v=20260716j"></script>
 
     <!-- 按严格顺序引入业务脚本：数据必须最先加载 -->
-    <script src="./js/data.js?v=20260716i"></script>
-    <script src="./js/map.js?v=20260716i"></script>
-    <script src="./js/app.js?v=20260716i"></script>
+    <script src="./js/data.js?v=20260716j"></script>
+    <script src="./js/map.js?v=20260716j"></script>
+    <script src="./js/app.js?v=20260716j"></script>
 </body>
 </html>

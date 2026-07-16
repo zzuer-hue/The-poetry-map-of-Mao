@@ -396,11 +396,25 @@
                 entry.style.display = 'none';
                 if (videoContainer) videoContainer.style.display = 'none';
                 document.body.classList.add('mobile-mode');
+
+                // 显示移动端加载提示
+                const loadingEl = document.getElementById('mobile-loading');
+                if (loadingEl) loadingEl.style.display = 'flex';
+
                 const mainEl = document.getElementById('main-content');
                 mainEl.classList.add('active');
                 if (bgm) { loadBgm(bgm); bgm.volume = 0.4; bgm.play().catch(()=>{}); isPlaying = true; document.getElementById('music-btn').classList.add('playing'); }
                 initSidebar();
                 window.renderChinaMap();
+
+                // 主资源就绪后淡出加载提示
+                setTimeout(() => {
+                    if (loadingEl) {
+                        loadingEl.classList.add('hidden');
+                        setTimeout(() => { loadingEl.style.display = 'none'; }, 500);
+                    }
+                }, 1200);
+
                 return; // 移动端到此结束，不走下面的视频逻辑
             }
 
