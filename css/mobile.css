@@ -27,7 +27,7 @@ body.mobile-mode #title {
     font-size: 14px !important;
     letter-spacing: 1px !important;
     white-space: normal !important;
-    font-family: 'STKaiti', 'KaiTi', '楷体', serif !important;
+    font-family: 'MaoFont', 'STKaiti', 'KaiTi', '楷体', serif !important;
 }
 body.mobile-mode #subtitle {
     font-size: 9px !important;
