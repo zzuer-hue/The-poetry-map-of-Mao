@@ -390,6 +390,7 @@
 
                 entry.style.display = 'none';
                 if (videoContainer) videoContainer.style.display = 'none';
+                document.body.classList.add('mobile-mode');
                 const mainEl = document.getElementById('main-content');
                 mainEl.classList.add('active');
                 if (bgm) { bgm.src = 'audio/mainaudio.mp3'; bgm.volume = 0.4; bgm.play().catch(()=>{}); isPlaying = true; document.getElementById('music-btn').classList.add('playing'); }
@@ -1685,19 +1686,20 @@ function fireDanmaku(text) {
     danmaku.className = 'danmaku-item';
     danmaku.innerText = `“ ${text} ”`; 
 
-    // 随机 Y 轴高度 (屏幕顶部 15% 到 80% 之间)
-    const topPercent = 15 + Math.random() * 65;
+    // 随机 Y 轴高度 (屏幕顶部 15% 到 80% 之间，移动端限制在 15%-45% 避免遮挡)
+    const isMobile = window.innerWidth <= 768;
+    const topPercent = 15 + Math.random() * (isMobile ? 30 : 65);
     danmaku.style.top = topPercent + '%';
 
-    // 随机字体大小 (26px 到 46px 之间)
-    const fontSize = 26 + Math.random() * 20;
+    // 随机字体大小 (桌面 26-46px，移动端 14-20px)
+    const fontSize = isMobile ? (14 + Math.random() * 6) : (26 + Math.random() * 20);
     danmaku.style.fontSize = fontSize + 'px';
 
     // 随机透明度 (0.6 到 1 之间)
     danmaku.style.opacity = 0.6 + Math.random() * 0.4;
 
-    // 随机划过屏幕的时间 (8秒 到 16秒 之间)
-    const duration = 8 + Math.random() * 8;
+    // 随机划过屏幕的时间 (桌面 8-16s，移动端 5-8s)
+    const duration = isMobile ? (5 + Math.random() * 3) : (8 + Math.random() * 8);
     danmaku.style.animationDuration = duration + 's';
 
     container.appendChild(danmaku);
@@ -1717,6 +1719,9 @@ function fireDanmaku(text) {
 // 鼠标点击名句特效系统 (长短句混合版)
 // ===================================================================
 document.addEventListener('click', function(e) {
+    // 移动端禁用点击名句特效，避免遮挡小屏幕操作
+    if (window.innerWidth <= 768) return;
+
     // 创建文字节点
     const quoteEl = document.createElement('span');
     quoteEl.className = 'click-quote-effect';

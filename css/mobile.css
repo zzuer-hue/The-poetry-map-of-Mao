@@ -1,252 +1,255 @@
 /* ==========================================================================
-   mobile.css — 移动端专属样式（仅 max-width:768px 生效）
-   桌面端完全不加载此文件，物理隔离，互不影响
+   mobile.css — 移动端专属样式（仅 body.mobile-mode 生效）
+   桌面端不添加 mobile-mode class，因此这些规则完全不会生效
    ========================================================================== */
 
-@media (max-width: 768px) {
-    /* ========================================================
-       0. 移动端系统字体替代（@font-face 已被 JS 删除）
-       ======================================================== */
-    body, html, #title, #subtitle, .modal-poem-title, .modal-full-text,
-    .modal-background-text, .modal-section-title, .modal-poem-meta,
-    .sidebar-title, .card-school-name, .card-students, .timeline-label,
-    #timeline-current-year, .about-modal-title, .quiz-title, .qw-title,
-    .tl-title, .stats-title, .lm-title, .quote-card, .stat-num {
-        font-family: 'STKaiti', 'KaiTi', '楷体', 'STSong', 'SimSun', serif !important;
-    }
-
-    /* ========================================================
-       1. 右侧导航栏改为底部横向滚动条，地图全屏居中
-       ======================================================== */
-    #sidebar {
-        position: absolute !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        top: auto !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 130px !important;
-        max-height: 130px !important;
-        transform: none !important;
-        z-index: 1000;
-        display: flex !important;
-        flex-direction: column;
-        background: rgba(20,5,5,0.92);
-        border-top: 1px solid rgba(255,215,0,0.3);
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
-    }
-    /* 隐藏 header 统计/标签/搜索（底部条只显示诗词列表） */
-    .sidebar-header { display: none !important; }
-    /* school-list 横向滚动 */
-    #school-list {
-        display: flex !important;
-        flex-direction: row !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        padding: 8px 10px !important;
-        gap: 8px !important;
-        flex: 1;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-    }
-    #school-list::-webkit-scrollbar { height: 4px; }
-    #school-list::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.4); border-radius: 2px; }
-    /* school-card 横向卡片 */
-    .school-card {
-        flex: 0 0 auto !important;
-        width: 150px !important;
-        min-width: 150px !important;
-        margin-bottom: 0 !important;
-        padding: 8px 10px !important;
-    }
-    .card-school-name { font-size: 14px !important; }
-    .card-province { font-size: 10px !important; padding: 2px 6px !important; }
-    .card-students { font-size: 11px !important; line-height: 1.5 !important; }
-    .card-year-badge { font-size: 18px !important; }
-
-    /* 隐藏"展开全集"按钮（底部条始终可见，不需要切换） */
-    #mobile-toggle { display: none !important; }
-
-    /* ========================================================
-       2. 顶部标题区 + 时间轴移到标题下方
-       ======================================================== */
-    #title-container {
-        width: 100%;
-        top: calc(8px + env(safe-area-inset-top));
-        left: 50%;
-        padding: 0 110px;
-        box-sizing: border-box;
-        text-align: center;
-    }
-    #title { font-size: 14px; letter-spacing: 1px; white-space: normal; }
-    #subtitle { font-size: 9px; letter-spacing: 1px; margin-top: 2px; }
-
-    /* 底部时间轴移到标题正下方 */
-    #timeline-container {
-        position: absolute;
-        left: 50%;
-        top: calc(52px + env(safe-area-inset-top));
-        bottom: auto !important;
-        width: 92%;
-        padding: 0 10px;
-        height: 30px;
-        transform: translateX(-50%);
-    }
-    #timeline-current-year {
-        font-size: 12px;
-        padding: 2px 8px;
-        top: -28px;
-        letter-spacing: 1px;
-    }
-    #timeline-current-year::after { bottom: -8px; height: 8px; }
-    .timeline-label { font-size: 10px; }
-    #timeline-play-btn { width: 24px; height: 24px; font-size: 11px; }
-    #time-slider::-webkit-slider-thumb { width: 14px; height: 14px; }
-
-    /* ========================================================
-       3. 左侧只保留 2 个按钮，其余隐藏
-       ======================================================== */
-    #about-btn, #overview-btn {
-        padding: 5px 9px;
-        font-size: 10px;
-        letter-spacing: 1px;
-        top: calc(10px + env(safe-area-inset-top));
-    }
-    #about-btn { left: 10px; }
-    #overview-btn { left: 10px; top: calc(40px + env(safe-area-inset-top)); }
-    #today-btn, #quiz-btn, #quote-wall-btn,
-    #timeline-btn, #stats-btn, #longmarch-btn {
-        display: none !important;
-    }
-
-    /* ========================================================
-       4. 截屏/音乐按钮定位（底部列表上方）
-       ======================================================== */
-    #snapshot-btn, #music-btn {
-        width: 34px; height: 34px;
-        position: absolute;
-        bottom: 138px;
-    }
-    #music-btn { left: 12px; }
-    #snapshot-btn { left: 54px; }
-
-    /* 地图控制按钮移到右下角（底部列表上方）*/
-    #map-controls {
-        right: 12px;
-        bottom: 138px;
-    }
-    .control-btn { width: 34px; height: 34px; font-size: 15px; }
-
-    /* ========================================================
-       5. 诗词鉴赏弹窗：全屏可滚动式
-       ======================================================== */
-    .poem-scroll-content {
-        width: 94vw !important;
-        max-width: none !important;
-        aspect-ratio: auto !important;
-        height: 88vh;
-        max-height: 88vh;
-        padding: 8px 12px calc(16px + env(safe-area-inset-bottom)) 12px;
-        border-radius: 10px;
-    }
-    .modal-header-info { margin-top: 44px; margin-bottom: 8px; padding-bottom: 10px; }
-    .modal-poem-title { font-size: 22px; letter-spacing: 1px; margin-bottom: 6px; }
-    .modal-poem-meta { font-size: 12px; }
-    .modal-actions { gap: 6px; margin-top: 6px; flex-wrap: wrap; }
-    .modal-fav-btn, .modal-audio-btn, .modal-speed-btn { padding: 4px 10px; font-size: 11px; }
-    .modal-body {
-        padding: 12px 10px;
-        gap: 12px;
-        border-radius: 8px;
-        padding-bottom: calc(14px + env(safe-area-inset-bottom));
-    }
-    .modal-section-title { font-size: 15px; margin-bottom: 6px; }
-    .modal-section-title::before { font-size: 10px; margin-right: 6px; }
-    .modal-full-text { font-size: 16px; line-height: 1.9; letter-spacing: 2px; }
-    .modal-background-text { font-size: 14px; line-height: 2; padding: 10px; letter-spacing: 0.5px; }
-    .modal-quote { display: none !important; }
-    .close-modal { top: 6px; right: 6px; width: 28px; height: 28px; font-size: 12px; }
-    .modal-font-btns { top: 6px; left: 6px; gap: 4px; }
-    .font-btn { width: 28px; height: 28px; font-size: 11px; }
-    .anno-original { font-size: 14px; }
-    .anno-translation { font-size: 13px; line-height: 1.6; }
-    .annotation-toggle-btn { font-size: 11px; padding: 4px 12px; }
-    .modal-annotation { padding: 10px 12px; }
-    .mf-ctrl { top: 10px; right: 48px; gap: 3px; }
-    .mf-ctrl span { width: 24px; height: 24px; line-height: 24px; font-size: 11px; }
-
-    /* ========================================================
-       6. 各功能弹窗统一紧凑
-       ======================================================== */
-    .about-modal-box {
-        aspect-ratio: auto !important;
-        width: 94vw !important;
-        max-width: none !important;
-        padding: 24px 16px calc(16px + env(safe-area-inset-bottom)) 16px;
-        max-height: 88vh;
-    }
-    .about-modal-title { font-size: 20px; letter-spacing: 2px; }
-    .about-modal-stats { padding: 10px 0; margin-bottom: 14px; }
-    .am-num { font-size: 24px; }
-    .am-lbl { font-size: 10px; }
-    .about-modal-desc { font-size: 12px; line-height: 1.7; margin-bottom: 12px; }
-    .about-modal-section-title { font-size: 13px; margin: 12px 0 8px; }
-    .about-module-item { padding: 6px 8px; margin-bottom: 6px; }
-    .about-module-icon { font-size: 16px; }
-    .about-module-name { font-size: 12px; }
-    .about-module-desc { font-size: 11px; line-height: 1.5; margin-top: 2px; }
-    .about-modal-tip { font-size: 11px; padding: 8px 10px; line-height: 1.6; }
-
-    .quiz-box, .timeline-box, .stats-modal-box, .lm-box, .quote-wall-box {
-        width: 94vw !important;
-        padding: 24px 14px calc(16px + env(safe-area-inset-bottom)) 14px !important;
-        max-height: calc(88vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
-    }
-    .quiz-title, .qw-title, .tl-title, .stats-title, .lm-title { font-size: 18px; letter-spacing: 2px; }
-    .qw-subtitle, .tl-subtitle, .lm-subtitle { font-size: 10px; margin-top: 3px; margin-bottom: 12px; }
-    .quiz-hint { font-size: 13px !important; margin-bottom: 10px; }
-    .quiz-poem-text { font-size: 14px !important; padding: 12px; line-height: 1.8; margin-bottom: 14px; max-height: 30vh; }
-    .quiz-option { font-size: 15px !important; padding: 10px; }
-    .quiz-correct, .quiz-wrong { font-size: 14px !important; }
-    .quiz-info { font-size: 12px !important; }
-    .quiz-bg { font-size: 11px !important; padding: 10px; line-height: 1.6; }
-    .quiz-next { font-size: 14px !important; padding: 10px; }
-    .quote-wall-content { column-count: 1; }
-    .quote-card { font-size: 14px !important; padding: 14px; line-height: 1.8; margin-bottom: 12px; }
-    .tl-item { padding: 10px 10px 10px 44px; margin-bottom: 6px; }
-    .tl-item::before { left: 12px; top: 14px; width: 12px; height: 12px; }
-    .tl-year { font-size: 16px !important; }
-    .tl-poem { font-size: 14px !important; }
-    .tl-quote { font-size: 12px !important; line-height: 1.6; }
-    .tl-location { font-size: 11px !important; }
-    .lm-item { padding: 12px 14px; margin-bottom: 8px; }
-    .lm-year { font-size: 15px !important; }
-    .lm-poem { font-size: 14px !important; }
-    .lm-quote { font-size: 12px !important; line-height: 1.6; }
-    .lm-location { font-size: 11px !important; }
-    .stats-grid { gap: 10px; margin-bottom: 14px; }
-    .stats-card { padding: 14px; }
-    .stats-num { font-size: 28px; }
-    .stats-lbl { font-size: 12px !important; }
-    .stats-bar-label { font-size: 12px !important; }
-    .stats-province-tag { font-size: 12px !important; padding: 3px 10px; }
-
-    /* 海报分享面板 */
-    .poster-share-box { padding: 14px; gap: 10px; }
-    .poster-share-title { font-size: 15px; letter-spacing: 1px; }
-    .ps-btn { padding: 8px 12px; font-size: 11px; }
+body.mobile-mode {
+    font-family: 'STKaiti', 'KaiTi', '楷体', 'STSong', 'SimSun', serif !important;
 }
 
-/* === 超小屏幕进一步压缩 === */
+body.mobile-mode #entry-screen {
+    display: none !important;
+}
+
+/* 标题区域 */
+body.mobile-mode #title-container {
+    position: absolute;
+    top: calc(8px + env(safe-area-inset-top));
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    padding: 0 110px;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 100;
+}
+body.mobile-mode #title {
+    font-size: 14px !important;
+    letter-spacing: 1px !important;
+    white-space: normal !important;
+    font-family: 'STKaiti', 'KaiTi', '楷体', serif !important;
+}
+body.mobile-mode #subtitle {
+    font-size: 9px !important;
+    letter-spacing: 1px !important;
+    margin-top: 2px !important;
+    font-family: 'STKaiti', 'KaiTi', '楷体', serif !important;
+}
+
+/* 左侧按钮：只保留关于本站和随机品鉴 */
+body.mobile-mode #about-btn,
+body.mobile-mode #overview-btn {
+    display: block !important;
+    position: absolute;
+    left: 10px;
+    padding: 5px 9px !important;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+    z-index: 101;
+}
+body.mobile-mode #about-btn { top: calc(10px + env(safe-area-inset-top)); }
+body.mobile-mode #overview-btn { top: calc(40px + env(safe-area-inset-top)); }
+body.mobile-mode #today-btn,
+body.mobile-mode #quiz-btn,
+body.mobile-mode #quote-wall-btn,
+body.mobile-mode #timeline-btn,
+body.mobile-mode #stats-btn,
+body.mobile-mode #longmarch-btn {
+    display: none !important;
+}
+
+/* 时间轴：移到标题下方 */
+body.mobile-mode #timeline-container {
+    position: absolute;
+    left: 50%;
+    top: calc(52px + env(safe-area-inset-top));
+    bottom: auto !important;
+    width: 92%;
+    padding: 0 10px;
+    height: 30px;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+body.mobile-mode #timeline-current-year {
+    font-size: 12px !important;
+    padding: 2px 8px !important;
+    top: -28px !important;
+}
+body.mobile-mode #timeline-current-year::after { bottom: -8px !important; height: 8px !important; }
+body.mobile-mode .timeline-label { font-size: 10px !important; }
+body.mobile-mode #timeline-play-btn { width: 24px !important; height: 24px !important; font-size: 11px !important; }
+body.mobile-mode #time-slider::-webkit-slider-thumb { width: 14px !important; height: 14px !important; }
+
+/* 地图区域：占据全部可用空间，底部给列表留 140px */
+body.mobile-mode #main-content {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding-bottom: calc(140px + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+}
+body.mobile-mode #map-box {
+    position: absolute !important;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 90px - 140px - env(safe-area-inset-bottom));
+    z-index: 1;
+}
+
+/* 隐藏桌面版侧边栏标题内容 */
+body.mobile-mode .sidebar-header { display: none !important; }
+
+/* 底部横向诗词列表 */
+body.mobile-mode #sidebar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: calc(140px + env(safe-area-inset-bottom)) !important;
+    max-height: calc(140px + env(safe-area-inset-bottom)) !important;
+    transform: none !important;
+    z-index: 1000;
+    display: flex !important;
+    flex-direction: column;
+    background: rgba(20,5,5,0.95);
+    border-top: 1px solid rgba(255,215,0,0.3);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+body.mobile-mode #school-list {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom)) 10px !important;
+    gap: 8px !important;
+    flex: 1;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+body.mobile-mode #school-list::-webkit-scrollbar { height: 4px; }
+body.mobile-mode #school-list::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.4); border-radius: 2px; }
+body.mobile-mode .school-card {
+    flex: 0 0 auto !important;
+    width: 150px !important;
+    min-width: 150px !important;
+    margin-bottom: 0 !important;
+    padding: 8px 10px !important;
+    box-sizing: border-box;
+}
+body.mobile-mode .card-school-name { font-size: 14px !important; }
+body.mobile-mode .card-province { font-size: 10px !important; padding: 2px 6px !important; }
+body.mobile-mode .card-students { font-size: 11px !important; line-height: 1.5 !important; }
+body.mobile-mode .card-year-badge { font-size: 18px !important; }
+
+/* 隐藏"展开全集"按钮 */
+body.mobile-mode #mobile-toggle { display: none !important; }
+
+/* 截屏/音乐按钮：放在底部列表上方 */
+body.mobile-mode #snapshot-btn,
+body.mobile-mode #music-btn {
+    width: 34px !important;
+    height: 34px !important;
+    position: fixed !important;
+    bottom: calc(148px + env(safe-area-inset-bottom));
+    z-index: 1001;
+}
+body.mobile-mode #music-btn { left: 12px; }
+body.mobile-mode #snapshot-btn { left: 54px; }
+
+/* 地图控制按钮 */
+body.mobile-mode #map-controls {
+    position: fixed !important;
+    right: 12px;
+    bottom: calc(148px + env(safe-area-inset-bottom));
+    z-index: 1001;
+}
+body.mobile-mode .control-btn { width: 34px !important; height: 34px !important; font-size: 15px !important; }
+
+/* 弹幕缩小 */
+body.mobile-mode .danmaku-item {
+    font-size: 14px !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8) !important;
+}
+
+/* 诗词弹窗 */
+body.mobile-mode .poem-scroll-content {
+    width: 94vw !important;
+    max-width: none !important;
+    aspect-ratio: auto !important;
+    height: 88vh;
+    max-height: 88vh;
+    padding: 8px 12px calc(16px + env(safe-area-inset-bottom)) 12px;
+    border-radius: 10px;
+}
+body.mobile-mode .modal-header-info { margin-top: 44px; margin-bottom: 8px; padding-bottom: 10px; }
+body.mobile-mode .modal-poem-title { font-size: 22px; letter-spacing: 1px; margin-bottom: 6px; }
+body.mobile-mode .modal-poem-meta { font-size: 12px; }
+body.mobile-mode .modal-actions { gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+body.mobile-mode .modal-fav-btn,
+body.mobile-mode .modal-audio-btn,
+body.mobile-mode .modal-speed-btn { padding: 4px 10px; font-size: 11px; }
+body.mobile-mode .modal-body {
+    padding: 12px 10px;
+    gap: 12px;
+    border-radius: 8px;
+    padding-bottom: calc(14px + env(safe-area-inset-bottom));
+}
+body.mobile-mode .modal-section-title { font-size: 15px; margin-bottom: 6px; }
+body.mobile-mode .modal-section-title::before { font-size: 10px; margin-right: 6px; }
+body.mobile-mode .modal-full-text { font-size: 16px; line-height: 1.9; letter-spacing: 2px; }
+body.mobile-mode .modal-background-text { font-size: 14px; line-height: 2; padding: 10px; letter-spacing: 0.5px; }
+body.mobile-mode .modal-quote { display: none !important; }
+body.mobile-mode .close-modal { top: 6px; right: 6px; width: 28px; height: 28px; font-size: 12px; }
+body.mobile-mode .modal-font-btns { top: 6px; left: 6px; gap: 4px; }
+body.mobile-mode .font-btn { width: 28px; height: 28px; font-size: 11px; }
+
+/* 功能弹窗 */
+body.mobile-mode .about-modal-box,
+body.mobile-mode .quiz-box,
+body.mobile-mode .timeline-box,
+body.mobile-mode .stats-modal-box,
+body.mobile-mode .lm-box,
+body.mobile-mode .quote-wall-box {
+    aspect-ratio: auto !important;
+    width: 94vw !important;
+    max-width: none !important;
+    padding: 24px 14px calc(16px + env(safe-area-inset-bottom)) 14px !important;
+    max-height: calc(88vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+}
+body.mobile-mode .about-modal-title,
+body.mobile-mode .quiz-title,
+body.mobile-mode .qw-title,
+body.mobile-mode .tl-title,
+body.mobile-mode .stats-title,
+body.mobile-mode .lm-title { font-size: 18px; letter-spacing: 2px; }
+body.mobile-mode .about-modal-desc,
+body.mobile-mode .quiz-bg,
+body.mobile-mode .quote-card { font-size: 12px !important; line-height: 1.7 !important; }
+body.mobile-mode .quote-wall-content { column-count: 1; }
+body.mobile-mode .quote-card { padding: 12px; margin-bottom: 10px; }
+
+/* 海报面板 */
+body.mobile-mode .poster-share-box { padding: 14px; gap: 10px; }
+body.mobile-mode .poster-share-title { font-size: 15px; letter-spacing: 1px; }
+body.mobile-mode .ps-btn { padding: 8px 12px; font-size: 11px; }
+
+/* 超小屏 */
 @media (max-width: 380px) {
-    #title { font-size: 12px; letter-spacing: 1px; }
-    #title-container { padding: 0 100px; }
-    .modal-poem-title { font-size: 20px; }
-    .modal-full-text { font-size: 14px; letter-spacing: 1px; }
-    #about-btn, #overview-btn { padding: 4px 8px; font-size: 10px; }
-    .poem-scroll-content { padding: 8px 8px 12px 8px; }
-    .modal-body { padding: 10px 8px; }
-    .school-card { width: 130px !important; min-width: 130px !important; }
-    #sidebar { height: 120px !important; max-height: 120px !important; }
+    body.mobile-mode #title { font-size: 12px !important; }
+    body.mobile-mode #title-container { padding: 0 100px; }
+    body.mobile-mode #map-box { height: calc(100% - 90px - 130px - env(safe-area-inset-bottom)); }
+    body.mobile-mode #sidebar { height: calc(130px + env(safe-area-inset-bottom)) !important; max-height: calc(130px + env(safe-area-inset-bottom)) !important; }
+    body.mobile-mode #snapshot-btn,
+    body.mobile-mode #music-btn { bottom: calc(138px + env(safe-area-inset-bottom)); }
+    body.mobile-mode #map-controls { bottom: calc(138px + env(safe-area-inset-bottom)); }
+    body.mobile-mode .school-card { width: 130px !important; min-width: 130px !important; }
 }

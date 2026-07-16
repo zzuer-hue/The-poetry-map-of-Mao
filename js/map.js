@@ -73,11 +73,24 @@ let myChart = null;
                 tooltip: {
                     trigger: 'item', padding: 0, backgroundColor: 'transparent', borderColor: 'transparent', borderWidth: 0,
                     formatter: function (params) {
+                        const isMobile = window.innerWidth <= 768;
                         if(params.seriesIndex === 2) {
-                            return `<div style="padding: 12px; background: rgba(20,5,5,0.95); border: 1px solid #ba2a24; color: #FFD700; border-radius: 4px; font-weight: bold; box-shadow: 0 0 15px rgba(186,42,36,0.5); font-family: '楷体', serif;">🌟 长征终点：延安<br><span style="font-size: 13px; color: #d4a373; font-weight: normal; margin-top: 5px; display: inline-block;">1935年-1948年 中共中央所在地</span></div>`;
+                            return `<div style="padding: ${isMobile?'8px 10px':'12px'}; background: rgba(20,5,5,0.95); border: 1px solid #ba2a24; color: #FFD700; border-radius: 4px; font-weight: bold; box-shadow: 0 0 15px rgba(186,42,36,0.5); font-family: '楷体', serif; font-size: ${isMobile?'12px':'14px'};">🌟 长征终点：延安<br><span style="font-size: ${isMobile?'11px':'13px'}; color: #d4a373; font-weight: normal; margin-top: 5px; display: inline-block;">1935年-1948年 中共中央所在地</span></div>`;
                         }
                         if(params.seriesType === 'scatter' || params.seriesType === 'effectScatter') {
                             if (!params.data.poem) return; 
+                            if (isMobile) {
+                                return `
+                                    <div style="background: linear-gradient(145deg, #1e0b0b 0%, #0f0404 100%); border: 1px solid rgba(212, 163, 115, 0.4); border-radius: 6px; padding: 10px 12px; min-width: 180px; max-width: 240px; box-shadow: 0 4px 15px rgba(0,0,0,0.7); position: relative;">
+                                        <div style="display:flex; align-items:baseline; margin-bottom:6px; border-bottom:1px solid rgba(212,163,115,0.2); padding-bottom:5px;">
+                                            <span style="font-weight:bold; font-size:16px; color:#d4a373; font-family: 'Times New Roman', serif; line-height: 1;">${params.data.year}</span>
+                                            <span style="font-size:12px; color:#a87b51; margin-left:6px;">年 · ${params.name}</span>
+                                        </div>
+                                        <div style="color:#FFD700; font-size:15px; margin-bottom:6px; font-family: 'KaiTi','楷体','STKaiti', serif; font-weight:normal;">${params.data.poem}</div>
+                                        <div style="font-size:12px; color: #e6d5c3; line-height: 1.5; font-family: 'KaiTi','楷体', serif;">${params.data.quote}</div>
+                                    </div>
+                                `;
+                            }
                             const randomShortQ = shortMaoQuotes[params.dataIndex % shortMaoQuotes.length] || '星火燎原';
                             return `
                                 <div style="background: linear-gradient(145deg, #1e0b0b 0%, #0f0404 100%); border: 1px solid rgba(212, 163, 115, 0.4); border-radius: 6px; padding: 22px; min-width: 280px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(212,163,115,0.05); position: relative; overflow: hidden;">
