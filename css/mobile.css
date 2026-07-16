@@ -5,6 +5,17 @@
 
 @media (max-width: 768px) {
     /* ========================================================
+       0. 移动端系统字体替代（@font-face 已被 JS 删除，这里指定系统楷体）
+       ======================================================== */
+    body, html, #title, #subtitle, .modal-poem-title, .modal-full-text,
+    .modal-background-text, .modal-section-title, .modal-poem-meta,
+    .sidebar-title, .card-school-name, .card-students, .timeline-label,
+    #timeline-current-year, .about-modal-title, .quiz-title, .qw-title,
+    .tl-title, .stats-title, .lm-title, .quote-card, .stat-num {
+        font-family: 'STKaiti', 'KaiTi', '楷体', 'STSong', 'SimSun', serif !important;
+    }
+
+    /* ========================================================
        1. 右侧列表默认收起，地图全屏显示
        ======================================================== */
     #main-content { overflow: hidden; }

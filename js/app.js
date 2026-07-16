@@ -369,11 +369,23 @@
 
             // === 移动端快速通道：跳过视频转场，直接进入主地图 ===
             if (window.innerWidth <= 768) {
+                // 移动端删除 @font-face 大字体规则，用系统字体加速首屏
+                try {
+                    for (let i = document.styleSheets.length - 1; i >= 0; i--) {
+                        const sheet = document.styleSheets[i];
+                        const rules = sheet.cssRules || sheet.rules;
+                        if (!rules) continue;
+                        for (let j = rules.length - 1; j >= 0; j--) {
+                            if (rules[j].type === 5) sheet.deleteRule(j); // 5 = FONT_FACE_RULE
+                        }
+                    }
+                } catch(e) {}
+
                 entry.style.display = 'none';
                 if (videoContainer) videoContainer.style.display = 'none';
                 const mainEl = document.getElementById('main-content');
                 mainEl.classList.add('active');
-                if (bgm) { bgm.volume = 0.4; bgm.play().catch(()=>{}); isPlaying = true; document.getElementById('music-btn').classList.add('playing'); }
+                if (bgm) { bgm.src = 'audio/mainaudio.mp3'; bgm.volume = 0.4; bgm.play().catch(()=>{}); isPlaying = true; document.getElementById('music-btn').classList.add('playing'); }
                 initSidebar();
                 window.renderChinaMap();
                 return; // 移动端到此结束，不走下面的视频逻辑
@@ -423,7 +435,10 @@
             // 3. 视频结束后，才正式启动主地图逻辑与BGM
             const main = document.getElementById('main-content');
             main.classList.add('active');
-            
+
+            // 动态设置背景音乐 src（不在 HTML 源码暴露音频路径）
+            if (bgm) bgm.src = 'audio/mainaudio.mp3';
+
             // 开启主背景音乐
             if (bgm) {
                 bgm.volume = 0; // 从静音开始
@@ -968,10 +983,17 @@
                     useCORS: true,
                     allowTaint: true
                 }).then(canvas => {
-                    const link = document.createElement('a');
-                    link.download = title + '_诗词卡片.png';
-                    link.href = canvas.toDataURL('image/png');
-                    link.click();
+                    // 用 blob 方式下载，兼容手机端
+                    canvas.toBlob(function(blob) {
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.download = title + '_诗词卡片.png';
+                        link.href = url;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        setTimeout(() => URL.revokeObjectURL(url), 1000);
+                    }, 'image/png');
                     card.remove();
                 }).catch(err => {
                     console.error('卡片生成失败', err);
@@ -1120,7 +1142,7 @@
             if (tourTimer) { stopTour(); } 
             else {
                 tlBtn.innerText = '⏸'; tlBtn.classList.add('playing');
-                if(window.innerWidth <= 768) toggleSidebar(); 
+                // 移动端巡航不弹侧边栏，保持地图全屏显示路线
                 if(!isPlaying) document.getElementById('music-btn').click();
                 
                 // =========================================================
@@ -1179,8 +1201,9 @@
 
             html2canvas(document.getElementById('main-content'), {
                 useCORS: true,
+                allowTaint: true,
                 backgroundColor: '#2a0808',
-                scale: 2,
+                scale: window.innerWidth <= 768 ? 1.5 : 2,
                 logging: false,
                 ignoreElements: (element) => {
                     return element.classList && element.classList.contains('snapshot-hide');
@@ -1192,6 +1215,7 @@
 
                 // 保存到全局变量供下载/分享使用
                 window._lastPosterDataUrl = canvas.toDataURL('image/png');
+                window._lastPosterCanvas = canvas; // 保留 canvas 供 blob 下载
                 // 显示预览
                 const img = document.getElementById('poster-preview-img');
                 img.src = window._lastPosterDataUrl;
@@ -1211,12 +1235,19 @@
         };
 
         window.downloadPoster = function() {
-            if (!window._lastPosterDataUrl) return;
-            const link = document.createElement('a');
-            link.download = '毛主席诗词全景编年史地图.png';
-            link.href = window._lastPosterDataUrl;
-            link.click();
-            showPsToast('海报已开始下载');
+            if (!window._lastPosterCanvas) return;
+            // 用 blob 方式下载，兼容手机端浏览器
+            window._lastPosterCanvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = '毛主席诗词全景编年史地图.png';
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+                showPsToast('海报已开始下载');
+            }, 'image/png');
         };
 
         window.copyShareLink = async function() {
