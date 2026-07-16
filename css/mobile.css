@@ -102,14 +102,14 @@ body.mobile-mode #map-box {
     top: 90px;
     left: 0;
     width: 100%;
-    height: calc(100% - 90px - 140px - env(safe-area-inset-bottom));
+    height: calc(100% - 90px - 140px - 20px - env(safe-area-inset-bottom));
     z-index: 1;
 }
 
 /* 隐藏桌面版侧边栏标题内容 */
 body.mobile-mode .sidebar-header { display: none !important; }
 
-/* 底部横向诗词列表 */
+/* 底部横向诗词列表：额外加 20px 缓冲，防止被系统手势导航条遮挡 */
 body.mobile-mode #sidebar {
     position: fixed !important;
     bottom: 0 !important;
@@ -118,8 +118,8 @@ body.mobile-mode #sidebar {
     top: auto !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: calc(140px + env(safe-area-inset-bottom)) !important;
-    max-height: calc(140px + env(safe-area-inset-bottom)) !important;
+    height: calc(140px + env(safe-area-inset-bottom) + 20px) !important;
+    max-height: calc(140px + env(safe-area-inset-bottom) + 20px) !important;
     transform: none !important;
     z-index: 1000;
     display: flex !important;
@@ -127,14 +127,14 @@ body.mobile-mode #sidebar {
     background: rgba(20,5,5,0.95);
     border-top: 1px solid rgba(255,215,0,0.3);
     box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
 }
 body.mobile-mode #school-list {
     display: flex !important;
     flex-direction: row !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
-    padding: 8px 10px calc(8px + env(safe-area-inset-bottom)) 10px !important;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom) + 10px) 10px !important;
     gap: 8px !important;
     flex: 1;
     scroll-behavior: smooth;
@@ -164,7 +164,7 @@ body.mobile-mode #music-btn {
     width: 34px !important;
     height: 34px !important;
     position: fixed !important;
-    bottom: calc(148px + env(safe-area-inset-bottom));
+    bottom: calc(168px + env(safe-area-inset-bottom));
     z-index: 1001;
 }
 body.mobile-mode #music-btn { left: 12px; }
@@ -174,7 +174,7 @@ body.mobile-mode #snapshot-btn { left: 54px; }
 body.mobile-mode #map-controls {
     position: fixed !important;
     right: 12px;
-    bottom: calc(148px + env(safe-area-inset-bottom));
+    bottom: calc(168px + env(safe-area-inset-bottom));
     z-index: 1001;
 }
 body.mobile-mode .control-btn { width: 34px !important; height: 34px !important; font-size: 15px !important; }
@@ -274,10 +274,10 @@ body.mobile-mode .ps-btn { padding: 8px 12px; font-size: 11px; }
 @media (max-width: 380px) {
     body.mobile-mode #title { font-size: 12px !important; }
     body.mobile-mode #title-container { padding: 0 100px; }
-    body.mobile-mode #map-box { height: calc(100% - 90px - 130px - env(safe-area-inset-bottom)); }
-    body.mobile-mode #sidebar { height: calc(130px + env(safe-area-inset-bottom)) !important; max-height: calc(130px + env(safe-area-inset-bottom)) !important; }
+    body.mobile-mode #map-box { height: calc(100% - 90px - 130px - 20px - env(safe-area-inset-bottom)); }
+    body.mobile-mode #sidebar { height: calc(130px + env(safe-area-inset-bottom) + 20px) !important; max-height: calc(130px + env(safe-area-inset-bottom) + 20px) !important; }
     body.mobile-mode #snapshot-btn,
-    body.mobile-mode #music-btn { bottom: calc(138px + env(safe-area-inset-bottom)); }
-    body.mobile-mode #map-controls { bottom: calc(138px + env(safe-area-inset-bottom)); }
+    body.mobile-mode #music-btn { bottom: calc(158px + env(safe-area-inset-bottom)); }
+    body.mobile-mode #map-controls { bottom: calc(158px + env(safe-area-inset-bottom)); }
     body.mobile-mode .school-card { width: 130px !important; min-width: 130px !important; }
 }
