@@ -136,7 +136,27 @@ body.mobile-mode #timeline-current-year {
 }
 body.mobile-mode #timeline-current-year::after { bottom: -8px !important; height: 8px !important; }
 body.mobile-mode .timeline-label { font-size: 10px !important; }
-body.mobile-mode #timeline-play-btn { width: 24px !important; height: 24px !important; font-size: 11px !important; }
+/* 移动端播放按钮：缩小圆圈+三角，防止穿模 */
+body.mobile-mode #timeline-play-btn {
+    width: 32px !important; height: 32px !important;
+    border-width: 2px !important;
+    animation: none !important;
+    box-shadow: 0 0 10px rgba(255,215,0,0.35), inset 0 0 8px rgba(255,215,0,0.1) !important;
+}
+body.mobile-mode #timeline-play-btn::before {
+    border-width: 7px 0 7px 11px !important; /* 三角高14 底边11 */
+    margin-left: 3px !important;
+    filter: drop-shadow(0 0 5px rgba(255,215,0,0.9)) !important;
+}
+body.mobile-mode #timeline-play-btn.playing::before {
+    border: none !important;
+    width: 4px !important; height: 14px !important;
+    background: #fff !important;
+    box-shadow: 7px 0 0 #fff !important;
+    margin-left: -5px !important;
+    border-radius: 1px !important;
+    filter: drop-shadow(0 0 6px rgba(255,215,0,0.9)) !important;
+}
 body.mobile-mode #time-slider::-webkit-slider-thumb { width: 14px !important; height: 14px !important; }
 
 /* 地图区域：占据全部可用空间，底部给列表留 140px */

@@ -442,7 +442,7 @@ body, html {
         /* 巡航播放按钮：用 CSS 伪元素画三角，大小精确可控、视觉居中 */
         #timeline-play-btn {
             color: #FFD700; cursor: pointer; 
-            width: 56px; height: 56px; flex-shrink: 0;
+            width: 48px; height: 48px; flex-shrink: 0;
             display: flex; justify-content: center; align-items: center;
             border-radius: 50%; 
             border: 2px solid rgba(255, 215, 0, 0.85); 
@@ -459,9 +459,9 @@ body, html {
             display: block;
             width: 0; height: 0;
             border-style: solid;
-            border-width: 14px 0 14px 22px; /* 上14 下14 左22 = 三角高28 底边22 */
+            border-width: 11px 0 11px 17px; /* 上11 下11 左17 = 三角高22 底边17 */
             border-color: transparent transparent transparent #FFD700;
-            margin-left: 5px; /* 补偿三角视觉重心偏左，让其在圆心居中 */
+            margin-left: 4px; /* 补偿三角视觉重心偏左，让其在圆心居中 */
             filter: drop-shadow(0 0 8px rgba(255,215,0,0.9)) drop-shadow(0 0 16px rgba(255,215,0,0.5));
             transition: all 0.3s;
         }
@@ -485,10 +485,10 @@ body, html {
         }
         #timeline-play-btn.playing::before {
             border: none;
-            width: 6px; height: 28px;
+            width: 5px; height: 22px;
             background: #fff;
-            box-shadow: 12px 0 0 #fff; /* 第二条竖线 */
-            margin-left: -9px; /* 居中两条竖线（总宽18px） */
+            box-shadow: 10px 0 0 #fff; /* 第二条竖线 */
+            margin-left: -7px; /* 居中两条竖线（总宽15px） */
             border-radius: 1px;
             filter: drop-shadow(0 0 10px rgba(255,215,0,1)) drop-shadow(0 0 20px rgba(255,215,0,0.6));
         }
