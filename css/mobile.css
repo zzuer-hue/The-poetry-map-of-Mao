@@ -3,105 +3,137 @@
    桌面端完全不加载此文件，物理隔离，互不影响
    ========================================================================== */
 
-/* ==========================================================================
-   12. 移动端全面适配增强 (Mobile Enhancement)
-   覆盖原 768px 媒体查询中未完善的布局问题
-   ========================================================================== */
 @media (max-width: 768px) {
-    /* === 顶部标题区：防与左右按钮重叠 === */
+    /* ========================================================
+       1. 右侧列表默认收起，地图全屏显示
+       ======================================================== */
+    /* 父容器裁剪溢出，确保 translateX(100%) 能真正隐藏侧边栏 */
+    #main-content { overflow: hidden; }
+    #sidebar {
+        width: 100% !important;
+        max-width: 100% !important;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 1100;
+        box-shadow: -4px 0 20px rgba(0,0,0,0.5);
+    }
+    #sidebar.open { transform: translateX(0); }
+
+    /* "☰ 展开全集"按钮：作为地图/列表切换入口，左下角醒目 */
+    #mobile-toggle {
+        display: block !important;
+        position: absolute;
+        left: 16px;
+        bottom: calc(90px + env(safe-area-inset-bottom));
+        background: rgba(255,215,0,0.2);
+        color: #FFD700;
+        border: 1px solid #FFD700;
+        padding: 10px 18px;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 13px;
+        z-index: 1001;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.6), 0 0 12px rgba(255,215,0,0.3);
+    }
+
+    /* ========================================================
+       2. 顶部标题区：防与左右按钮重叠
+       ======================================================== */
     #title-container {
         width: 100%;
-        top: 10px;
+        top: calc(10px + env(safe-area-inset-top));
         left: 50%;
         padding: 0 110px;
         box-sizing: border-box;
     }
-    #title {
-        font-size: 17px;
-        letter-spacing: 2px;
-        white-space: normal;
-    }
+    #title { font-size: 17px; letter-spacing: 2px; white-space: normal; }
     #subtitle { font-size: 10px; letter-spacing: 1px; margin-top: 3px; }
 
-    /* === 左侧功能按钮紧凑化（防重叠堆叠） === */
+    /* ========================================================
+       3. 左侧功能按钮紧凑化（避开刘海/摄像头，防重叠）
+       ======================================================== */
     #about-btn, #overview-btn, #today-btn, #quiz-btn, #quote-wall-btn,
     #timeline-btn, #stats-btn, #longmarch-btn {
         padding: 5px 10px;
         font-size: 11px;
         letter-spacing: 1px;
     }
-    #about-btn { top: 12px; }
-    #overview-btn { top: 44px; }
-    #today-btn { top: 44px; }
-    #quiz-btn { top: 70px; }
-    #quote-wall-btn { top: 96px; }
-    #timeline-btn { top: 122px; }
-    #stats-btn { top: 148px; }
-    #longmarch-btn { top: 174px; }
+    #about-btn { top: calc(12px + env(safe-area-inset-top)); }
+    #overview-btn { top: calc(44px + env(safe-area-inset-top)); }
+    #today-btn { top: calc(44px + env(safe-area-inset-top)); }
+    #quiz-btn { top: calc(70px + env(safe-area-inset-top)); }
+    #quote-wall-btn { top: calc(96px + env(safe-area-inset-top)); }
+    #timeline-btn { top: calc(122px + env(safe-area-inset-top)); }
+    #stats-btn { top: calc(148px + env(safe-area-inset-top)); }
+    #longmarch-btn { top: calc(174px + env(safe-area-inset-top)); }
 
-    /* === 侧边栏 === */
-    .sidebar-header { padding: 14px 14px 8px; }
-    .sidebar-title { font-size: 16px; }
-    .stat-num { font-size: 22px; }
-    .stat-label { font-size: 11px; margin-top: 4px; }
-    .stats-box { margin-top: 10px; }
-    .school-card { padding: 10px 12px; margin-bottom: 8px; }
-    .card-school-name { font-size: 15px; }
-    .card-province { font-size: 10px; }
-    .card-students { font-size: 12px; }
+    /* ========================================================
+       4. 底部时间轴上移，避开浏览器地址栏/系统导航栏
+       ======================================================== */
+    #timeline-container {
+        left: 50%;
+        bottom: calc(20px + env(safe-area-inset-bottom));
+        width: 90%;
+        padding: 0 16px;
+        height: 36px;
+    }
+    #timeline-current-year {
+        font-size: 15px;
+        padding: 5px 12px;
+        top: calc(-40px - env(safe-area-inset-bottom));
+        letter-spacing: 2px;
+    }
+    #timeline-current-year::after { bottom: -12px; height: 12px; }
+    .timeline-label { font-size: 13px; }
+    #timeline-play-btn { width: 28px; height: 28px; font-size: 14px; }
+    #time-slider::-webkit-slider-thumb { width: 18px; height: 18px; }
 
-    /* === 诗词鉴赏弹窗：取消固定 4:3 比例，改为可滚动全屏式 === */
+    /* 音乐 / 截图按钮上移 */
+    #snapshot-btn, #music-btn {
+        width: 40px; height: 40px;
+        bottom: calc(20px + env(safe-area-inset-bottom));
+    }
+    #snapshot-btn { left: 84px; }
+    #music-btn { left: 28px; }
+
+    /* 地图控制按钮上移 */
+    #map-controls {
+        right: 16px;
+        bottom: calc(90px + env(safe-area-inset-bottom));
+    }
+    .control-btn { width: 40px; height: 40px; font-size: 18px; }
+
+    /* ========================================================
+       5. 诗词鉴赏弹窗：全屏可滚动式
+       ======================================================== */
     .poem-scroll-content {
         width: 94vw !important;
         max-width: none !important;
         aspect-ratio: auto !important;
         height: 90vh;
         max-height: 90vh;
-        padding: 8px 12px 16px 12px;
+        padding: 8px 12px calc(16px + env(safe-area-inset-bottom)) 12px;
         border-radius: 10px;
     }
-    .modal-header-info {
-        margin-top: 48px;
-        margin-bottom: 8px;
-        padding-bottom: 10px;
-    }
-    .modal-poem-title {
-        font-size: 24px;
-        letter-spacing: 1px;
-        margin-bottom: 6px;
-    }
+    .modal-header-info { margin-top: 48px; margin-bottom: 8px; padding-bottom: 10px; }
+    .modal-poem-title { font-size: 24px; letter-spacing: 1px; margin-bottom: 6px; }
     .modal-poem-meta { font-size: 13px; }
     .modal-actions { gap: 6px; margin-top: 6px; flex-wrap: wrap; }
-    .modal-fav-btn, .modal-audio-btn, .modal-speed-btn {
-        padding: 4px 10px;
-        font-size: 11px;
-    }
+    .modal-fav-btn, .modal-audio-btn, .modal-speed-btn { padding: 4px 10px; font-size: 11px; }
     .modal-body {
         padding: 14px 12px;
         gap: 12px;
         border-radius: 8px;
+        padding-bottom: calc(14px + env(safe-area-inset-bottom));
     }
-    .modal-section-title { font-size: 15px; margin-bottom: 6px; }
+    .modal-section-title { font-size: 16px; margin-bottom: 6px; }
     .modal-section-title::before { font-size: 10px; margin-right: 6px; }
-    .modal-full-text {
-        font-size: 16px;
-        line-height: 1.7;
-        letter-spacing: 2px;
-    }
-    .modal-background-text {
-        font-size: 14px;
-        line-height: 1.8;
-        padding: 12px;
-        letter-spacing: 0.5px;
-    }
+    .modal-full-text { font-size: 17px; line-height: 1.9; letter-spacing: 2px; }
+    .modal-background-text { font-size: 15px; line-height: 2; padding: 12px; letter-spacing: 0.5px; }
     /* 水印在手机端遮挡内容，隐藏 */
     .modal-quote { display: none !important; }
     /* 关闭按钮与字号按钮 */
-    .close-modal {
-        top: 6px; right: 6px;
-        width: 28px; height: 28px;
-        font-size: 12px;
-    }
+    .close-modal { top: 6px; right: 6px; width: 28px; height: 28px; font-size: 12px; }
     .modal-font-btns { top: 6px; left: 6px; gap: 4px; }
     .font-btn { width: 28px; height: 28px; font-size: 11px; }
     /* 逐句释义 */
@@ -109,13 +141,18 @@
     .anno-translation { font-size: 13px; line-height: 1.6; }
     .annotation-toggle-btn { font-size: 11px; padding: 4px 12px; }
     .modal-annotation { padding: 10px 12px; }
+    /* 字号调节按钮 */
+    .mf-ctrl { top: 10px; right: 48px; gap: 3px; }
+    .mf-ctrl span { width: 24px; height: 24px; line-height: 24px; font-size: 11px; }
 
-    /* === 关于本站弹窗：取消 16:9 固定比例 === */
+    /* ========================================================
+       6. 关于本站弹窗：取消 16:9 固定比例
+       ======================================================== */
     .about-modal-box {
         aspect-ratio: auto !important;
         width: 94vw !important;
         max-width: none !important;
-        padding: 24px 16px 16px 16px;
+        padding: 24px 16px calc(16px + env(safe-area-inset-bottom)) 16px;
         max-height: 88vh;
     }
     .about-modal-title { font-size: 20px; letter-spacing: 2px; }
@@ -130,68 +167,25 @@
     .about-module-desc { font-size: 11px; line-height: 1.5; margin-top: 2px; }
     .about-modal-tip { font-size: 11px; padding: 8px 10px; line-height: 1.6; }
 
-    /* === 地图控制按钮 === */
-    .control-btn { width: 36px; height: 36px; font-size: 16px; }
-
-    /* === 底部时间轴 === */
-    #timeline-current-year {
-        font-size: 15px;
-        padding: 5px 12px;
-        top: -48px;
-        letter-spacing: 2px;
-    }
-    #timeline-current-year::after { bottom: -12px; height: 12px; }
-    #timeline-container { height: 36px; padding: 0 16px; }
-    .timeline-label { font-size: 11px; }
-    #timeline-play-btn { width: 28px; height: 28px; font-size: 14px; }
-
-    /* === 音乐 / 截图按钮 === */
-    #snapshot-btn, #music-btn {
-        width: 40px; height: 40px;
-        bottom: 28px;
-    }
-    #snapshot-btn { left: 84px; }
-    #music-btn { left: 28px; }
-
-    /* === 海报分享面板 === */
-    .poster-share-box { padding: 14px; gap: 10px; }
-    .poster-share-title { font-size: 15px; letter-spacing: 1px; }
-    .ps-btn { padding: 8px 12px; font-size: 11px; }
-
-    /* === 各功能弹窗（闯关/金句墙/年代/统计/长征）统一紧凑 === */
+    /* ========================================================
+       7. 各功能弹窗（闯关/金句墙/年代/统计/长征）统一紧凑
+       ======================================================== */
     .quiz-box, .timeline-box, .stats-modal-box, .lm-box, .quote-wall-box {
         width: 94vw !important;
-        padding: 24px 14px 16px 14px !important;
+        padding: 24px 14px calc(16px + env(safe-area-inset-bottom)) 14px !important;
+        max-height: calc(90vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
     }
-    .quiz-title, .qw-title, .tl-title, .stats-title, .lm-title {
-        font-size: 18px;
-        letter-spacing: 2px;
-    }
-    .qw-subtitle, .tl-subtitle, .lm-subtitle {
-        font-size: 10px;
-        margin-top: 3px;
-        margin-bottom: 12px;
-    }
+    .quiz-title, .qw-title, .tl-title, .stats-title, .lm-title { font-size: 18px; letter-spacing: 2px; }
+    .qw-subtitle, .tl-subtitle, .lm-subtitle { font-size: 10px; margin-top: 3px; margin-bottom: 12px; }
     .quiz-hint { font-size: 13px !important; margin-bottom: 10px; }
-    .quiz-poem-text {
-        font-size: 14px !important;
-        padding: 12px;
-        line-height: 1.8;
-        margin-bottom: 14px;
-        max-height: 30vh;
-    }
+    .quiz-poem-text { font-size: 14px !important; padding: 12px; line-height: 1.8; margin-bottom: 14px; max-height: 30vh; }
     .quiz-option { font-size: 15px !important; padding: 10px; }
     .quiz-correct, .quiz-wrong { font-size: 14px !important; }
     .quiz-info { font-size: 12px !important; }
     .quiz-bg { font-size: 11px !important; padding: 10px; line-height: 1.6; }
     .quiz-next { font-size: 14px !important; padding: 10px; }
     .quote-wall-content { column-count: 1; }
-    .quote-card {
-        font-size: 14px !important;
-        padding: 14px;
-        line-height: 1.8;
-        margin-bottom: 12px;
-    }
+    .quote-card { font-size: 14px !important; padding: 14px; line-height: 1.8; margin-bottom: 12px; }
     .tl-item { padding: 10px 10px 10px 44px; margin-bottom: 6px; }
     .tl-item::before { left: 12px; top: 14px; width: 12px; height: 12px; }
     .tl-year { font-size: 16px !important; }
@@ -210,9 +204,27 @@
     .stats-bar-label { font-size: 12px !important; }
     .stats-province-tag { font-size: 12px !important; padding: 3px 10px; }
 
-    /* === 字号调节按钮 === */
-    .mf-ctrl { top: 10px; right: 48px; gap: 3px; }
-    .mf-ctrl span { width: 24px; height: 24px; line-height: 24px; font-size: 11px; }
+    /* ========================================================
+       8. 侧边栏列表字号增大，改善阅读疲劳
+       ======================================================== */
+    .sidebar-header { padding: 14px 14px 8px; }
+    .sidebar-title { font-size: 17px; }
+    .stat-num { font-size: 24px; }
+    .stat-label { font-size: 12px; margin-top: 4px; }
+    .stats-box { margin-top: 10px; }
+    .school-card { padding: 12px 14px; margin-bottom: 10px; }
+    .card-school-name { font-size: 17px; }
+    .card-province { font-size: 12px; padding: 3px 8px; }
+    .card-students { font-size: 13px; line-height: 1.7; }
+    .card-year-badge { font-size: 22px; }
+    .progress-text { font-size: 13px; }
+
+    /* ========================================================
+       9. 海报分享面板
+       ======================================================== */
+    .poster-share-box { padding: 14px; gap: 10px; }
+    .poster-share-title { font-size: 15px; letter-spacing: 1px; }
+    .ps-btn { padding: 8px 12px; font-size: 11px; }
 }
 
 /* === 超小屏幕进一步压缩 === */
@@ -228,67 +240,4 @@
     }
     .poem-scroll-content { padding: 8px 8px 12px 8px; }
     .modal-body { padding: 12px 8px; }
-}
-
-/* ==========================================================================
-   13. 移动端 safe-area 安全区与字号优化
-   解决：① 浏览器地址栏/系统导航栏遮挡底部 ② 摄像头/刘海遮挡顶部
-        ③ 列表与地图字号过小
-   ========================================================================== */
-@media (max-width: 768px) {
-    /* === 顶部安全区：避开刘海/摄像头 === */
-    #title-container { top: calc(10px + env(safe-area-inset-top)); }
-    #about-btn { top: calc(12px + env(safe-area-inset-top)); }
-    #overview-btn { top: calc(44px + env(safe-area-inset-top)); }
-    #today-btn { top: calc(44px + env(safe-area-inset-top)); }
-    #quiz-btn { top: calc(70px + env(safe-area-inset-top)); }
-    #quote-wall-btn { top: calc(96px + env(safe-area-inset-top)); }
-    #timeline-btn { top: calc(122px + env(safe-area-inset-top)); }
-    #stats-btn { top: calc(148px + env(safe-area-inset-top)); }
-    #longmarch-btn { top: calc(174px + env(safe-area-inset-top)); }
-
-    /* === 底部安全区：避开浏览器地址栏/系统导航栏 === */
-    #timeline-container { bottom: calc(35px + env(safe-area-inset-bottom)); }
-    #timeline-current-year { top: calc(-48px - env(safe-area-inset-bottom)); }
-    #music-btn, #snapshot-btn { bottom: calc(28px + env(safe-area-inset-bottom)); }
-    #mobile-toggle { bottom: calc(40px + env(safe-area-inset-bottom)); }
-    .modal-body { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
-    .quiz-box, .timeline-box, .stats-modal-box, .lm-box,
-    .quote-wall-box, .about-modal-box, .poster-share-box {
-        padding-bottom: calc(16px + env(safe-area-inset-bottom)) !important;
-        max-height: calc(90vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
-    }
-
-    /* === 列表字号增大，改善阅读疲劳 === */
-    .school-card { padding: 12px 14px; margin-bottom: 10px; }
-    .card-school-name { font-size: 17px; }
-    .card-province { font-size: 12px; padding: 3px 8px; }
-    .card-students { font-size: 13px; line-height: 1.7; }
-    .card-year-badge { font-size: 22px; }
-    .stat-num { font-size: 24px; }
-    .stat-label { font-size: 12px; }
-    .progress-text { font-size: 13px; }
-    .sidebar-title { font-size: 17px; }
-
-    /* === 时间轴标签字号增大 === */
-    .timeline-label { font-size: 13px; }
-    #timeline-current-year { font-size: 17px; padding: 6px 14px; }
-    #time-slider::-webkit-slider-thumb { width: 18px; height: 18px; }
-
-    /* === "☰ 展开全集"按钮更醒目（地图/列表切换入口） === */
-    #mobile-toggle {
-        font-size: 13px;
-        padding: 12px 22px;
-        font-weight: bold;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.6), 0 0 12px rgba(255,215,0,0.3);
-    }
-
-    /* === 弹窗内字号微调 === */
-    .modal-section-title { font-size: 16px; }
-    .modal-full-text { font-size: 17px; line-height: 1.9; }
-    .modal-background-text { font-size: 15px; line-height: 2; }
-
-    /* === 地图控制按钮增大 === */
-    .control-btn { width: 40px; height: 40px; font-size: 18px; }
-    #map-controls { bottom: calc(100px + env(safe-area-inset-bottom)); }
 }
