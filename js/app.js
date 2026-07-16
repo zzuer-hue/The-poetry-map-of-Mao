@@ -367,6 +367,23 @@
         //         }
         //     }, 1500); // 配合入场屏的淡出动画时间
         // }
+        // 通过 fetch + blob URL 加载背景音乐，避免真实路径直接暴露在 DOM/HTML 中
+        async function loadBgm(audioEl) {
+            if (!audioEl) return;
+            try {
+                // 路径拆分，增加静态嗅探难度
+                const parts = ['audio', 'main', 'audio', '.mp3'];
+                const url = parts[0] + '/' + parts[1] + parts[2] + parts[3];
+                const resp = await fetch(url);
+                if (!resp.ok) throw new Error('bgm fetch failed');
+                const blob = await resp.blob();
+                audioEl.src = URL.createObjectURL(blob);
+            } catch(e) {
+                // 兜底：如果 fetch 失败（如跨域），回退到直接路径
+                audioEl.src = 'audio/mainaudio.mp3';
+            }
+        }
+
         async function startSystem() {
             const entry = document.getElementById('entry-screen');
             const videoContainer = document.getElementById('intro-video-container');
@@ -381,7 +398,7 @@
                 document.body.classList.add('mobile-mode');
                 const mainEl = document.getElementById('main-content');
                 mainEl.classList.add('active');
-                if (bgm) { bgm.src = 'audio/mainaudio.mp3'; bgm.volume = 0.4; bgm.play().catch(()=>{}); isPlaying = true; document.getElementById('music-btn').classList.add('playing'); }
+                if (bgm) { loadBgm(bgm); bgm.volume = 0.4; bgm.play().catch(()=>{}); isPlaying = true; document.getElementById('music-btn').classList.add('playing'); }
                 initSidebar();
                 window.renderChinaMap();
                 return; // 移动端到此结束，不走下面的视频逻辑
@@ -432,8 +449,8 @@
             const main = document.getElementById('main-content');
             main.classList.add('active');
 
-            // 动态设置背景音乐 src（不在 HTML 源码暴露音频路径）
-            if (bgm) bgm.src = 'audio/mainaudio.mp3';
+            // 动态设置背景音乐 src（通过 blob URL 隐藏真实路径）
+            if (bgm) loadBgm(bgm);
 
             // 开启主背景音乐
             if (bgm) {

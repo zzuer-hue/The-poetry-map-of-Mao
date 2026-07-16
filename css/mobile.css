@@ -39,15 +39,33 @@ body.mobile-mode #subtitle {
 /* 左侧按钮：只保留关于本站和随机品鉴 */
 body.mobile-mode #about-btn,
 body.mobile-mode #overview-btn {
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     position: absolute;
+    z-index: 101;
+}
+body.mobile-mode #about-btn {
+    left: 10px;
+    top: calc(10px + env(safe-area-inset-top));
     padding: 5px 9px !important;
     font-size: 10px !important;
     letter-spacing: 1px !important;
-    z-index: 101;
+    border-radius: 6px !important;
 }
-body.mobile-mode #about-btn { left: 10px; top: calc(10px + env(safe-area-inset-top)); }
-body.mobile-mode #overview-btn { right: 10px; top: calc(10px + env(safe-area-inset-top)); }
+body.mobile-mode #overview-btn {
+    right: 10px;
+    top: calc(10px + env(safe-area-inset-top));
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 18px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    background: rgba(212, 163, 115, 0.15) !important;
+    border: 1px solid rgba(212, 163, 115, 0.4) !important;
+    backdrop-filter: blur(8px);
+}
+body.mobile-mode #overview-btn span { pointer-events: none; }
 body.mobile-mode #today-btn,
 body.mobile-mode #quiz-btn,
 body.mobile-mode #quote-wall-btn,
